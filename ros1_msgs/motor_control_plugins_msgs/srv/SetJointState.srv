@@ -1,0 +1,25 @@
+# This is intended to set joint state in a simulated robot, where state is 
+# not read from the JRCP. 
+string name
+
+uint8 op # bit field of set ops:
+uint8 SET_ERRORS = 1
+uint8 SET_FLAGS = 2
+uint8 SET_MOTION = 4
+# Reset command for debug convenience:
+uint8 CMD_RESET  = 16
+
+# ERRORS
+uint16  jointErrors
+uint8   boardErrors
+# FLAGS
+uint16 jointFlags
+uint8   boardFlags
+# MOTION
+float64 position
+float64 velocity
+float64 effort
+
+float64 current
+--- 
+bool result

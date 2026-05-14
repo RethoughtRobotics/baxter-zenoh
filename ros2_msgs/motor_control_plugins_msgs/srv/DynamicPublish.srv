@@ -1,0 +1,8 @@
+string node
+string topic_name
+string module
+string group
+string variable
+int32 size
+--- 
+bool result

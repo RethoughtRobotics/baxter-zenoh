@@ -1,0 +1,12 @@
+- ros1_package_name: arm_navigation_msgs
+  ros1_service_name: GetPlanningScene
+  ros2_package_name: arm_navigation_msgs
+  ros2_service_name: GetPlanningScene
+- ros1_package_name: arm_navigation_msgs
+  ros1_service_name: GetRobotState
+  ros2_package_name: arm_navigation_msgs
+  ros2_service_name: GetRobotState
+- ros1_package_name: arm_navigation_msgs
+  ros1_service_name: SetPlanningSceneDiff
+  ros2_package_name: arm_navigation_msgs
+  ros2_service_name: SetPlanningSceneDiff

@@ -1,0 +1,12 @@
+string node
+int32 gain_p
+int32 gain_i
+int32 gain_d
+int32 gain_ff
+int32 gain_bemf
+int32 mode # internal used for hacking 1 = use filtered error signal 
+string control_mode # torque, position, pwm, current etc.
+int32 alpha # 0 -> 100 to change overall stiffness
+int32 gravity_compensation_torque
+--- 
+bool result

@@ -1,0 +1,6 @@
+# service call for forward kinematics
+std_msgs/Header header
+sensor_msgs/JointState joint_state
+---
+# returns a pose
+geometry_msgs/Pose pose

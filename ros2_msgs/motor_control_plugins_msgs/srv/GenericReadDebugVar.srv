@@ -1,0 +1,10 @@
+string node
+
+string module
+string group
+string variable
+int32 size
+
+--- 
+int32 value
+bool result

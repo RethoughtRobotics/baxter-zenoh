@@ -28,7 +28,7 @@ COPY ros2_msgs/ /ros2_ws/src/
 RUN bash -c "\
     source /opt/ros/kilted/setup.bash && \
     cd /ros2_ws && \
-    colcon build --packages-select baxter_core_msgs baxter_maintenance_msgs MotorControlPluginsMsgs MotorController"
+    colcon build --packages-select baxter_core_msgs baxter_maintenance_msgs arm_navigation_msgs"
 
 # ros1_bridge from source (master, pinned)
 RUN git clone --branch kilted --single-branch \

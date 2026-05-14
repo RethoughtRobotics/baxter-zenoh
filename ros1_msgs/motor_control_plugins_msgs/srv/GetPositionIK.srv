@@ -1,0 +1,6 @@
+# service call for inverse kinematics
+Header header
+geometry_msgs/Pose pose
+---
+# returns a pose
+sensor_msgs/JointState joint_state

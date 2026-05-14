@@ -1,0 +1,5 @@
+string node
+float32 ref_position
+float32 ref_torque
+--- 
+bool result

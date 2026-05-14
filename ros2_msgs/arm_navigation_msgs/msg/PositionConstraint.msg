@@ -1,0 +1,7 @@
+std_msgs/Header header
+string link_name
+geometry_msgs/Point target_point_offset
+geometry_msgs/Point position
+arm_navigation_msgs/Shape constraint_region_shape
+geometry_msgs/Quaternion constraint_region_orientation
+float64 weight

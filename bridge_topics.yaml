@@ -220,10 +220,13 @@ topics:
   # Cameras
   - { topic: /cameras/left_hand_camera/image,            type: sensor_msgs/msg/Image      }
   - { topic: /cameras/right_hand_camera/image,           type: sensor_msgs/msg/Image      }
+  - { topic: /cameras/head_camera/image,                 type: sensor_msgs/msg/Image      }
   - { topic: /cameras/left_hand_camera/camera_info,      type: sensor_msgs/msg/CameraInfo }
   - { topic: /cameras/right_hand_camera/camera_info,     type: sensor_msgs/msg/CameraInfo }
+  - { topic: /cameras/head_camera/camera_info,           type: sensor_msgs/msg/CameraInfo }
   - { topic: /cameras/left_hand_camera/camera_info_std,  type: sensor_msgs/msg/CameraInfo }
   - { topic: /cameras/right_hand_camera/camera_info_std, type: sensor_msgs/msg/CameraInfo }
+  - { topic: /cameras/head_camera/camera_info_std,       type: sensor_msgs/msg/CameraInfo }
 
   # TF
   - { topic: /tf,        type: tf2_msgs/msg/TFMessage }
@@ -262,16 +265,7 @@ services_2_to_1:
   # Planning scene registration
   - { service: /robot/register_planning_scene, type: std_srvs/Empty }
 
-  # Gravity compensation
-  - { service: /robot/limb/left/set_gc_enable,  type: MotorControlPluginsMsgs/SetGravityCompensationEnable }
-  - { service: /robot/limb/right/set_gc_enable, type: MotorControlPluginsMsgs/SetGravityCompensationEnable }
-  - { service: /robot/limb/left/set_gc_tare,    type: MotorControlPluginsMsgs/SetGravityCompensationTare  }
-  - { service: /robot/limb/right/set_gc_tare,   type: MotorControlPluginsMsgs/SetGravityCompensationTare  }
-
-  # Controller management
-  - { service: /list_controller_types,    type: MotorController/ListControllerTypes    }
-  - { service: /list_controllers,         type: MotorController/ListControllers        }
-  - { service: /load_controller,          type: MotorController/LoadController         }
-  - { service: /unload_controller,        type: MotorController/UnloadController       }
-  - { service: /switch_controllers,       type: MotorController/SwitchControllers      }
-  - { service: /reload_controller_libraries, type: MotorController/ReloadControllerLibraries }
+  # Planning scene / robot state (arm_navigation_msgs)
+  - { service: /robot/environment_server/get_planning_scene,       type: arm_navigation_msgs/GetPlanningScene    }
+  - { service: /robot/environment_server/get_robot_state,          type: arm_navigation_msgs/GetRobotState       }
+  - { service: /robot/environment_server/set_planning_scene_diff,  type: arm_navigation_msgs/SetPlanningSceneDiff }

@@ -1,0 +1,5 @@
+string node
+int32 cyclic_command
+int32 payload
+--- 
+bool result

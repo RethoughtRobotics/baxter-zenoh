@@ -1,0 +1,5 @@
+string node
+int32 Enable # 1 for enable, 0 for disable
+int32 Reset # 1 for reset, 0 default
+---
+bool result

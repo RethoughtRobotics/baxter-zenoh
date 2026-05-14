@@ -1,0 +1,10 @@
+std_msgs/Header header
+string link_name
+geometry_msgs/Pose pose
+geometry_msgs/Point absolute_position_tolerance
+float64 absolute_roll_tolerance
+float64 absolute_yaw_tolerance
+float64 absolute_pitch_tolerance
+int32 orientation_constraint_type
+int32 HEADER_FRAME=0
+int32 LINK_FRAME=1

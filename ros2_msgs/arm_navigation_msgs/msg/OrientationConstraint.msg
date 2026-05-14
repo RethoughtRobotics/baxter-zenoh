@@ -1,0 +1,10 @@
+std_msgs/Header header
+string link_name
+int32 type
+int32 LINK_FRAME=0
+int32 HEADER_FRAME=1
+geometry_msgs/Quaternion orientation
+float64 absolute_roll_tolerance
+float64 absolute_pitch_tolerance
+float64 absolute_yaw_tolerance
+float64 weight

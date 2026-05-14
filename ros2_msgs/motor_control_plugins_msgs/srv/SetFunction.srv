@@ -1,0 +1,9 @@
+string node
+int32 period # in ms
+int32 width # for pulse
+int32 upper_limit
+int32 lower_limit
+string mode # triangle/pulse/sine
+string control_mode # POSITION = 0, VELOCITY, CURRENT, TORQUE, PWM, 
+---
+bool result

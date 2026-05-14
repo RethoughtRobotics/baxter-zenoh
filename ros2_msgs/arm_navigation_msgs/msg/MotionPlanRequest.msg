@@ -1,0 +1,10 @@
+arm_navigation_msgs/WorkspaceParameters workspace_parameters
+arm_navigation_msgs/RobotState start_state
+arm_navigation_msgs/Constraints goal_constraints
+arm_navigation_msgs/Constraints path_constraints
+string planner_id
+string group_name
+int32 num_planning_attempts
+builtin_interfaces/Duration allowed_planning_time
+builtin_interfaces/Duration expected_path_duration
+builtin_interfaces/Duration expected_path_dt

@@ -1,0 +1,4 @@
+string node
+int32 data_interval_ms
+---
+bool result

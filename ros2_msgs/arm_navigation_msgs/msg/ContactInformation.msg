@@ -1,0 +1,13 @@
+std_msgs/Header header
+geometry_msgs/Point position
+geometry_msgs/Vector3 normal
+float64 depth
+string contact_body_1
+string attached_body_1
+uint32 body_type_1
+string contact_body_2
+string attached_body_2
+uint32 body_type_2
+uint32 ROBOT_LINK=0
+uint32 OBJECT=1
+uint32 ATTACHED_BODY=2

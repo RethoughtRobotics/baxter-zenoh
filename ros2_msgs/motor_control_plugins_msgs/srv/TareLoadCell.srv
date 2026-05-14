@@ -1,0 +1,4 @@
+int32 load_cell_radius_mm
+bool do_tare
+--- 
+bool result
