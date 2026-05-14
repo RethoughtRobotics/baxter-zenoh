@@ -1,5 +1,0 @@
-string node
-float32 RefPosition
-float32 RefTorque
---- 
-bool result

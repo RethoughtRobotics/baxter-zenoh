@@ -1,5 +1,0 @@
-string node
-int32 enable # 1 for enable, 0 for disable
-int32 reset # 1 for reset, 0 default
----
-bool result

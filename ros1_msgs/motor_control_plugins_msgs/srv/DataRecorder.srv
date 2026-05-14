@@ -1,4 +1,0 @@
-string node
-int32 dataIntervalMs
----
-bool result

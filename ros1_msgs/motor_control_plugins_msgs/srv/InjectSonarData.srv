@@ -1,4 +1,0 @@
-int32 sensorId
-float64[] rangeValues
---- 
-bool result

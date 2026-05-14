@@ -1,9 +1,0 @@
-string node
-int32 Period # in ms
-int32 Width # for pulse
-int32 UpperLimit
-int32 LowerLimit
-string Mode # triangle/pulse/sine
-string ControlMode # POSITION = 0, VELOCITY, CURRENT, TORQUE, PWM, 
----
-bool result

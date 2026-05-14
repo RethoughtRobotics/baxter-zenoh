@@ -1,6 +1,0 @@
-# service call for inverse kinematics
-std_msgs/Header header
-geometry_msgs/Pose pose
----
-# returns a pose
-sensor_msgs/JointState joint_state
