@@ -1,0 +1,8 @@
+- ros1_package_name: MotorControlPluginsMsgs
+  ros1_service_name: SetGravityCompensationEnable
+  ros2_package_name: MotorControlPluginsMsgs
+  ros2_service_name: SetGravityCompensationEnable
+- ros1_package_name: MotorControlPluginsMsgs
+  ros1_service_name: SetGravityCompensationTare
+  ros2_package_name: MotorControlPluginsMsgs
+  ros2_service_name: SetGravityCompensationTare

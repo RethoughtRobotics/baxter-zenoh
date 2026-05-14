@@ -15,8 +15,14 @@ export RMW_IMPLEMENTATION=rmw_zenoh_cpp
 
 exec ros2 run rmw_zenoh_cpp rmw_zenohd & sleep 3
 
+echo "Waiting for Baxter ROS 1 services..."
+until rosservice list 2>/dev/null | grep -q "/ExternalTools/left/PositionKinematicsNode/IKService"; do
+  sleep 1
+done
+echo "Baxter services ready"
+
 rosparam load /bridge_topics.yaml
 
-exec ros2 run ros1_bridge parameter_bridge 
+exec ros2 run ros1_bridge parameter_bridge
 
 # exec ros2 run ros1_bridge dynamic_bridge --bridge-all-topics

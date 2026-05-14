@@ -1,6 +1,6 @@
 FROM osrf/ros:kilted-desktop-full@sha256:c62c1847b106e214fe18b2b8c94222fd3d03897761cce3d16be063be6fc0461d
 
-# ROS-O: Noetic on Ubuntu 24.04 Noble ──────────────────────────
+# ROS-O: Noetic on Ubuntu 24.04 Noble
 RUN apt-get update && apt-get install -y --no-install-recommends curl gnupg && \
     curl -sSL https://ros.packages.techfak.net/gpg.key \
         -o /etc/apt/keyrings/ros-one-keyring.gpg && \
@@ -28,7 +28,7 @@ COPY ros2_msgs/ /ros2_ws/src/
 RUN bash -c "\
     source /opt/ros/kilted/setup.bash && \
     cd /ros2_ws && \
-    colcon build --packages-select baxter_core_msgs baxter_maintenance_msgs"
+    colcon build --packages-select baxter_core_msgs baxter_maintenance_msgs MotorControlPluginsMsgs MotorController"
 
 # ros1_bridge from source (master, pinned)
 RUN git clone --branch kilted --single-branch \

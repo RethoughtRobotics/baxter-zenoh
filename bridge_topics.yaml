@@ -243,13 +243,35 @@ topics:
 
 
 # ROS 1 services callable from ROS 2 clients
-services_1_to_2:
+services_2_to_1:
 
   # IK solver (left and right arms)
-  - { service: /ExternalTools/left/PositionKinematicsNode/IKServer,  type: baxter_core_msgs/SolvePositionIK }
-  - { service: /ExternalTools/right/PositionKinematicsNode/IKServer, type: baxter_core_msgs/SolvePositionIK }
+  - { service: /ExternalTools/left/PositionKinematicsNode/IKService,  type: baxter_core_msgs/SolvePositionIK }
+  - { service: /ExternalTools/right/PositionKinematicsNode/IKService, type: baxter_core_msgs/SolvePositionIK }
 
   # Camera management
-  - { service: /cameras/list_cameras, type: baxter_core_msgs/ListCameras }
-  - { service: /cameras/open_camera,  type: baxter_core_msgs/OpenCamera  }
-  - { service: /cameras/close_camera, type: baxter_core_msgs/CloseCamera }
+  - { service: /cameras/list,  type: baxter_core_msgs/ListCameras }
+  - { service: /cameras/open,  type: baxter_core_msgs/OpenCamera  }
+  - { service: /cameras/close, type: baxter_core_msgs/CloseCamera }
+  - { service: /cameras/reset, type: std_srvs/Empty               }
+
+  # Collision tare
+  - { service: /collision/left/tare,  type: std_srvs/Empty }
+  - { service: /collision/right/tare, type: std_srvs/Empty }
+
+  # Planning scene registration
+  - { service: /robot/register_planning_scene, type: std_srvs/Empty }
+
+  # Gravity compensation
+  - { service: /robot/limb/left/set_gc_enable,  type: MotorControlPluginsMsgs/SetGravityCompensationEnable }
+  - { service: /robot/limb/right/set_gc_enable, type: MotorControlPluginsMsgs/SetGravityCompensationEnable }
+  - { service: /robot/limb/left/set_gc_tare,    type: MotorControlPluginsMsgs/SetGravityCompensationTare  }
+  - { service: /robot/limb/right/set_gc_tare,   type: MotorControlPluginsMsgs/SetGravityCompensationTare  }
+
+  # Controller management
+  - { service: /list_controller_types,    type: MotorController/ListControllerTypes    }
+  - { service: /list_controllers,         type: MotorController/ListControllers        }
+  - { service: /load_controller,          type: MotorController/LoadController         }
+  - { service: /unload_controller,        type: MotorController/UnloadController       }
+  - { service: /switch_controllers,       type: MotorController/SwitchControllers      }
+  - { service: /reload_controller_libraries, type: MotorController/ReloadControllerLibraries }
