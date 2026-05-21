@@ -63,7 +63,7 @@ The bridge loads `bridge_topics.yaml` from inside the container and starts forwa
 In a separate terminal on your laptop:
 
 ```bash
-source /opt/ros/<jazzy|kilted|lyrical>/setup.bash
+source /opt/ros/$ROS_DISTRO/setup.bash
 unset ROS_DOMAIN_ID
 export RMW_IMPLEMENTATION=rmw_zenoh_cpp
 
@@ -81,12 +81,8 @@ Then run `rviz2`, `rqt`, or your own nodes. All topics in `bridge_topics.yaml` a
 **Enable / disable (required before sending commands)**
 ```bash
 # Baxter
-rosrun baxter_tools enable_robot.py -e   # enable
-rosrun baxter_tools enable_robot.py -d   # disable
-
-# Sawyer
-rosrun intera_interface enable_robot.py -e
-rosrun intera_interface enable_robot.py -d
+ros2 run baxter_tools enable_robot.py -e   # enable
+ros2 run baxter_tools enable_robot.py -d   # disable
 ```
 
 **Verify joint states are flowing**
@@ -94,4 +90,3 @@ rosrun intera_interface enable_robot.py -d
 ros2 topic echo /robot/joint_states
 ```
 
-> **Note:** You do not have root access on the robot. All custom nodes must run on your own machine.
