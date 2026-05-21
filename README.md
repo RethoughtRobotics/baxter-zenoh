@@ -119,6 +119,10 @@ If that doesn't work, make sure that your ROS_DOMAIN_ID is unset or the same in 
 unset ROS_DOMAIN_ID
 ros2 topic list
 ```
+Also make sure you have sourced the Baxter ROS 2 message definitions:
+```bash
+source ros2_msgs/install/setup.bash
+```
 
 </details>
 
