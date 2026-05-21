@@ -39,13 +39,13 @@ unset ROS_HOSTNAME
 
 </details>
 
-Pull the pre-built bridge image:
+<!-- Pull the pre-built bridge image:
 
 ```bash
 docker pull ghcr.io/rethoughtrobotics/baxter-zenoh:latest
-```
+``` -->
 
-Or build from source:
+build from source:
 
 ```bash
 docker build -t ghcr.io/rethoughtrobotics/baxter-zenoh:latest .
