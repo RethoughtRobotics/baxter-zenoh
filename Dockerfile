@@ -1,6 +1,6 @@
 FROM osrf/ros:kilted-desktop-full@sha256:c62c1847b106e214fe18b2b8c94222fd3d03897761cce3d16be063be6fc0461d
 
-# ROS-O: Noetic on Ubuntu 24.04 Noble
+# ROS-O:  Noetic on Ubuntu 24.04 Noble
 # Instructions from https://ros.packages.techfak.net
 RUN apt-get update && apt-get install -y --no-install-recommends curl gnupg && \
     curl -sSL https://ros.packages.techfak.net/gpg.key \

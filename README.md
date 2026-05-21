@@ -36,13 +36,13 @@ unset ROS_HOSTNAME
 Pull the pre-built bridge image:
 
 ```bash
-docker pull ghcr.io/rethoughtrobotics/baxter-zenoh:latest
+docker pull ghcr.io/RethoughtRobotics/baxter-zenoh:latest
 ```
 
 Or build from source:
 
 ```bash
-docker build -t ghcr.io/rethoughtrobotics/baxter-zenoh:latest .
+docker build -t ghcr.io/RethoughtRobotics/baxter-zenoh:latest .
 ```
 
 ---
@@ -57,7 +57,7 @@ ping -c1 10.42.0.2        # should succeed before continuing
 
 **Run the bridge**
 ```bash
-docker run --rm --network=host ghcr.io/rethoughtrobotics/baxter-zenoh:latest
+docker run --rm --network=host ghcr.io/RethoughtRobotics/baxter-zenoh:latest
 ```
 
 The bridge loads `bridge_topics.yaml` from inside the container and starts forwarding all configured topics and services between ROS 1 and ROS 2.
@@ -67,7 +67,7 @@ The bridge loads `bridge_topics.yaml` from inside the container and starts forwa
 > docker run --rm --network=host \
 >   -e ROS_MASTER_URI=http://<robot-ip>:11311 \
 >   -e ROS_IP=<your-ip> \
->   ghcr.io/rethoughtrobotics/baxter-zenoh:latest
+>   ghcr.io/RethoughtRobotics/baxter-zenoh:latest
 > ```
 
 ---
