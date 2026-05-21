@@ -1,11 +1,12 @@
-
-![alt text](overview.png)
-
-This container bridges Baxter's ROS 1 (`rosmaster` on the robot) to ROS 2 on your laptop using `ros1_bridge` over Zenoh.
+# Baxter Bridge
 
 ![ROS2 Jazzy](https://img.shields.io/badge/ROS2_Jazzy-passing-brightgreen?logo=ros&logoColor=white)
 ![ROS2 Kilted](https://img.shields.io/badge/ROS2_Kilted-passing-brightgreen?logo=ros&logoColor=white)
 ![ROS2 Lyrical](https://img.shields.io/badge/ROS2_Lyrical-passing-brightgreen?logo=ros&logoColor=white)
+
+![alt text](overview.png)
+
+This container bridges Baxter's ROS 1 (`rosmaster` on the robot) to ROS 2 on your laptop using `ros1_bridge` over Zenoh.
 
 ---
 
