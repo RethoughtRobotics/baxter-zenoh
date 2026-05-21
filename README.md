@@ -101,3 +101,38 @@ For robot control, enabling/disabling, and higher-level ROS 2 APIs see:
 ros2 topic echo /robot/joint_states
 ```
 
+---
+
+## FAQ
+
+<details>
+<summary><b>The bridge starts but I see no topics on the ROS 2 side</b></summary>
+
+Make sure `RMW_IMPLEMENTATION=rmw_zenoh_cpp` is set in your terminal. Without it your ROS 2 tools use a different middleware and can't see the bridge.
+
+```bash
+export RMW_IMPLEMENTATION=rmw_zenoh_cpp
+ros2 topic list
+```
+If that doesn't work, make sure that your ROS_DOMAIN_ID is unset or the same in both the container and your terminal.
+```bash
+unset ROS_DOMAIN_ID
+ros2 topic list
+```
+
+</details>
+
+<details>
+<summary><b>The bridge exits immediately after starting</b></summary>
+
+The bridge waits for the ROS 1 master before starting. Make sure the robot is on, the Ethernet link is up, and `10.42.0.2` is reachable:
+
+```bash
+nmcli connection up Rethink
+ping -c1 10.42.0.2
+```
+
+</details>
+
+<details>
+
