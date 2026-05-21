@@ -6,7 +6,7 @@
 
 ![alt text](overview.png)
 
-This container bridges Baxter's ROS 1 (`rosmaster` on the robot) to ROS 2 on your laptop using [`ros1_bridge`](https://github.com/Rethink-ROS2/ros1_bridge) over Zenoh.
+This container bridges Baxter's ROS 1 (`rosmaster` on the robot) to ROS 2 on your laptop using [`ros1_bridge`](https://github.com/RethoughtRobotics/ros1_bridge) over Zenoh.
 
 ---
 
@@ -92,8 +92,8 @@ All Baxter message types (`baxter_core_msgs`, `baxter_maintenance_msgs`, `arm_na
 
 For robot control, enabling/disabling, and higher-level ROS 2 APIs see:
 
-<a href="https://github.com/Rethink-ROS2/BaxterSDK">
-  <img src="https://gh-card.dev/repos/Rethink-ROS2/BaxterSDK.svg?fullname=" width="100%" />
+<a href="https://github.com/RethoughtRobotics/BaxterSDK">
+  <img src="https://gh-card.dev/repos/RethoughtRobotics/BaxterSDK.svg?fullname=" width="100%" />
 </a>
 
 **Verify the bridge is working**
