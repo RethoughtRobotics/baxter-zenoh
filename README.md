@@ -1,8 +1,8 @@
 # Baxter Bridge
 
-![ROS2 Jazzy](https://img.shields.io/badge/ROS2_Jazzy-passing-brightgreen?logo=ros&logoColor=white)
-![ROS2 Kilted](https://img.shields.io/badge/ROS2_Kilted-passing-brightgreen?logo=ros&logoColor=white)
-![ROS2 Lyrical](https://img.shields.io/badge/ROS2_Lyrical-passing-brightgreen?logo=ros&logoColor=white)
+![ROS2 Jazzy](https://img.shields.io/badge/ROS2_Jazzy-compatible-brightgreen?logo=ros&logoColor=white)
+![ROS2 Kilted](https://img.shields.io/badge/ROS2_Kilted-compatible-brightgreen?logo=ros&logoColor=white)
+![ROS2 Lyrical](https://img.shields.io/badge/ROS2_Lyrical-compatible-brightgreen?logo=ros&logoColor=white)
 
 ![alt text](overview.png)
 
@@ -56,6 +56,14 @@ docker run --rm --network=host baxter_bridge:latest
 
 The bridge loads `bridge_topics.yaml` from inside the container and starts forwarding all configured topics and services between ROS 1 and ROS 2.
 
+> **Different network?** The default robot IP is `10.42.0.2` and laptop IP is `10.42.0.1`. Override them without rebuilding:
+> ```bash
+> docker run --rm --network=host \
+>   -e ROS_MASTER_URI=http://<robot-ip>:11311 \
+>   -e ROS_IP=<your-ip> \
+>   baxter_bridge:latest
+> ```
+
 ---
 
 ## 3. Using the bridge from ROS 2
@@ -78,14 +86,11 @@ Then run `rviz2`, `rqt`, or your own nodes. All topics in `bridge_topics.yaml` a
 
 ## 4. Controlling the robot
 
-**Enable / disable (required before sending commands)**
-```bash
-# Baxter
-ros2 run baxter_tools enable_robot.py -e   # enable
-ros2 run baxter_tools enable_robot.py -d   # disable
-```
+For robot control, enabling/disabling, and higher-level ROS 2 APIs see:
 
-**Verify joint states are flowing**
+[![BaxterSDK](https://opengraph.githubassets.com/1/Rethink-ROS2/BaxterSDK)](https://github.com/Rethink-ROS2/BaxterSDK)
+
+**Verify the bridge is working**
 ```bash
 ros2 topic echo /robot/joint_states
 ```
