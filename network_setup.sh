@@ -1,17 +1,11 @@
 #!/usr/bin/env bash
-# One-time network setup for Baxter/Sawyer over Ethernet.
+# One-time network setup for Baxter over Ethernet.
 # Run once: bash network_setup.sh
 
 set -e
 
 # Install the Ethernet connection profile
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROFILE="$SCRIPT_DIR/Rethink.nmconnection"
-if [[ ! -f "$PROFILE" ]]; then
-    echo "ERROR: Rethink.nmconnection not found in $SCRIPT_DIR" >&2
-    exit 1
-fi
-sudo cp "$PROFILE" /etc/NetworkManager/system-connections/Rethink
+sudo cp "$(dirname "$0")/Rethink.nmconnection" /etc/NetworkManager/system-connections/Rethink
 sudo chown root:root /etc/NetworkManager/system-connections/Rethink
 sudo chmod 600 /etc/NetworkManager/system-connections/Rethink
 sudo systemctl restart NetworkManager
