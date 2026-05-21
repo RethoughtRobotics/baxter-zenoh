@@ -4,7 +4,7 @@
 ![ROS2 Kilted](https://img.shields.io/badge/ROS2_Kilted-compatible-brightgreen?logo=ros&logoColor=white)
 ![ROS2 Lyrical](https://img.shields.io/badge/ROS2_Lyrical-compatible-brightgreen?logo=ros&logoColor=white)
 
-![alt text](overview.png)
+![Baxter Bridge overview diagram](overview.png)
 
 This container bridges Baxter's ROS 1 (`rosmaster` on the robot) to ROS 2 on your laptop using [`ros1_bridge`](https://github.com/RethoughtRobotics/ros1_bridge) over Zenoh.
 
@@ -139,4 +139,8 @@ ping -c1 10.42.0.2
 </details>
 
 <details>
+<summary><b>I get a QoS mismatch warning on <code>/tf_static</code></b></summary>
 
+`/tf_static` requires `transient_local` durability so late-joining nodes receive static transforms. Ensure your tf2 listener is not overriding the QoS profile, and that you rebuilt the Docker image after any changes to `bridge_topics.yaml`.
+
+</details>

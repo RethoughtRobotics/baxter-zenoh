@@ -29,11 +29,11 @@ COPY ros2_msgs/ /ros2_ws/src/
 RUN bash -c "\
     source /opt/ros/kilted/setup.bash && \
     cd /ros2_ws && \
-    colcon build --packages-select baxter_core_msgs baxter_maintenance_msgs arm_navigation_msgs
+    colcon build --packages-select baxter_core_msgs baxter_maintenance_msgs arm_navigation_msgs"
 
 # ros1_bridge from source 
 RUN git clone --branch kilted --single-branch \
-    https://github.com/Rethink-ROS2/ros1_bridge/ \
+    https://github.com/RethoughtRobotics/ros1_bridge/ \
     /bridge_ws/src/ros1_bridge
     
 RUN bash -c "\
