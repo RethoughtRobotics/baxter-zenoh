@@ -156,4 +156,15 @@ nmcli connection up Rethink
 ping -c1 10.42.0.2
 ```
 </details>
+
+<details>
+<summary><b><code>nmcli connection up Rethink</code> says the connection is unknown</b></summary>
+
+The Rethink Ethernet profile has not been installed on this machine. Run the one-time network setup:
+
+```bash
+bash network_setup.sh
+```
+
+</details>
 <details>
