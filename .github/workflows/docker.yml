@@ -35,5 +35,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/baxter-zenoh:latest
-            ghcr.io/${{ github.repository_owner }}/baxter-zenoh:${{ github.sha }}
+            ghcr.io/${{ github.repository_owner | lower }}/baxter-zenoh:latest
+            ghcr.io/${{ github.repository_owner | lower }}/baxter-zenoh:${{ github.sha }}
