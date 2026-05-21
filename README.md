@@ -49,7 +49,7 @@ docker pull ghcr.io/rethoughtrobotics/baxter-zenoh:latest
 build from source:
 
 ```bash
-docker build -t ghcr.io/rethoughtrobotics/baxter-zenoh:latest .
+docker build -t baxter_bridge:latest .
 ```
 
 ---
