@@ -71,6 +71,9 @@ The bridge loads `bridge_topics.yaml` from inside the container and starts forwa
 In a separate terminal on your laptop:
 
 ```bash
+# Install Zenoh middleware (once)
+sudo apt install ros-$ROS_DISTRO-rmw-zenoh-cpp
+
 source /opt/ros/$ROS_DISTRO/setup.bash
 unset ROS_DOMAIN_ID
 export RMW_IMPLEMENTATION=rmw_zenoh_cpp
@@ -88,7 +91,9 @@ Then run `rviz2`, `rqt`, or your own nodes. All topics in `bridge_topics.yaml` a
 
 For robot control, enabling/disabling, and higher-level ROS 2 APIs see:
 
-[![BaxterSDK](https://gh-card.dev/repos/Rethink-ROS2/BaxterSDK.svg?fullname=)](https://github.com/Rethink-ROS2/BaxterSDK)
+<a href="https://github.com/Rethink-ROS2/BaxterSDK">
+  <img src="https://gh-card.dev/repos/Rethink-ROS2/BaxterSDK.svg?fullname=" width="100%" />
+</a>
 
 **Verify the bridge is working**
 ```bash
