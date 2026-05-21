@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
 source /opt/ros/one/setup.bash
 source /ros1_ws/devel/setup.bash
@@ -13,16 +13,29 @@ unset ROS_HOSTNAME
 
 export RMW_IMPLEMENTATION=rmw_zenoh_cpp
 
-exec ros2 run rmw_zenoh_cpp rmw_zenohd & sleep 3
+# Start zenoh daemon; use trap to ensure it is cleaned up if we exit before executing the bridge
+ros2 run rmw_zenoh_cpp rmw_zenohd &
+ZENOHD_PID=$!
+trap 'kill "$ZENOHD_PID" 2>/dev/null; wait "$ZENOHD_PID" 2>/dev/null' EXIT
 
-echo "Waiting for Baxter ROS 1 services..."
-until rosservice list 2>/dev/null | grep -q "/ExternalTools/left/PositionKinematicsNode/IKService"; do
-  sleep 1
+# Wait for zenohd to open its router port (7447)
+echo "Waiting for zenoh daemon (pid $ZENOHD_PID)..."
+until timeout 1 bash -c 'echo >/dev/tcp/localhost/7447' 2>/dev/null; do
+    kill -0 "$ZENOHD_PID" 2>/dev/null || { echo "ERROR: zenohd exited unexpectedly" >&2; exit 1; }
+    sleep 1
 done
-echo "Baxter services ready"
+echo "Zenoh daemon ready."
+
+# Wait for ROS 1 master
+MASTER_HOST="${ROS_MASTER_URI#http://}"
+MASTER_HOST="${MASTER_HOST%:*}"
+MASTER_PORT="${ROS_MASTER_URI##*:}"
+echo "Waiting for ROS master at $ROS_MASTER_URI..."
+until timeout 1 bash -c "echo >/dev/tcp/${MASTER_HOST}/${MASTER_PORT}" 2>/dev/null; do
+    sleep 2
+done
+echo "ROS master ready."
 
 rosparam load /bridge_topics.yaml
 
 exec ros2 run ros1_bridge parameter_bridge
-
-# exec ros2 run ros1_bridge dynamic_bridge --bridge-all-topics

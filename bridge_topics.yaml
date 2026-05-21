@@ -1,7 +1,7 @@
 # Baxter ROS1 - ROS2 bridge configuration
 #
 # Loaded onto the ROS1 parameter server with:  rosparam load /bridge_topics.yaml
-# Read by parameter_bridge at startup from params:  topics / services_1_to_2
+# Read by parameter_bridge at startup from params:  topics / services_2_to_1
 #
 # topics          — bidirectional; data flows where it is published
 #   type          — ROS 2 message type (bridge auto-maps to ROS 1 via mapping_rules.yaml)
@@ -229,8 +229,11 @@ topics:
   - { topic: /cameras/head_camera/camera_info_std,       type: sensor_msgs/msg/CameraInfo }
 
   # TF
-  - { topic: /tf,        type: tf2_msgs/msg/TFMessage }
-  - { topic: /tf_static, type: tf2_msgs/msg/TFMessage }
+  - { topic: /tf, type: tf2_msgs/msg/TFMessage }
+  - topic: /tf_static
+    type: tf2_msgs/msg/TFMessage
+    qos:
+      ros2: { durability: transient_local, reliability: reliable, depth: 100 }
 
   # Robust controllers (calibration / tare)
   - { topic: /robustcontroller/left/CalibrateArm/enable,  type: baxter_maintenance_msgs/msg/CalibrateArmEnable }

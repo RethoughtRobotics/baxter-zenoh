@@ -1,3 +1,6 @@
+
+![alt text](overview.png)
+
 ## Setup steps
 
 1. 
