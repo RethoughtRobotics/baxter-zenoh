@@ -32,8 +32,8 @@ RUN bash -c "\
     colcon build --packages-select baxter_core_msgs baxter_maintenance_msgs arm_navigation_msgs"
 
 # ros1_bridge from source 
-RUN git clone --branch main --single-branch \
-    https://github.com/RethoughtRobotics/ros1_bridge/ \
+RUN git clone --branch kilted --single-branch \
+    https://github.com/RethoughtRobotics/ros1_bridge \
     /bridge_ws/src/ros1_bridge
     
 RUN bash -c "\
