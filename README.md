@@ -6,7 +6,7 @@
 
 ![alt text](overview.png)
 
-This container bridges Baxter's ROS 1 (`rosmaster` on the robot) to ROS 2 on your laptop using `ros1_bridge` over Zenoh.
+This container bridges Baxter's ROS 1 (`rosmaster` on the robot) to ROS 2 on your laptop using [`ros1_bridge`](https://github.com/Rethink-ROS2/ros1_bridge) over Zenoh.
 
 ---
 
