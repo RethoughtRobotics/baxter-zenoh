@@ -143,10 +143,3 @@ ping -c1 10.42.0.2
 ```
 
 </details>
-
-<details>
-<summary><b>I get a QoS mismatch warning on <code>/tf_static</code></b></summary>
-
-`/tf_static` requires `transient_local` durability so late-joining nodes receive static transforms. Ensure your tf2 listener is not overriding the QoS profile, and that you rebuilt the Docker image after any changes to `bridge_topics.yaml`.
-
-</details>
