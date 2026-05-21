@@ -6,7 +6,7 @@
 # topics          — bidirectional; data flows where it is published
 #   type          — ROS 2 message type (bridge auto-maps to ROS 1 via mapping_rules.yaml)
 #
-# services_1_to_2 — ROS 1 services callable from ROS 2
+# services_2_to_1 — ROS 1 services callable from ROS 2
 #   type          — pkg/SrvName  (ROS 1 style, no "srv/" prefix)
 
 topics:
