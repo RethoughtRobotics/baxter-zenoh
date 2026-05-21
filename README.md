@@ -92,7 +92,7 @@ unset ROS_DOMAIN_ID
 export RMW_IMPLEMENTATION=rmw_zenoh_cpp
 
 # Build Baxter ROS 2 message definitions from this repo (once)
-cd ros2_msgs/
+cd ~/baxter-zenoh/ros2_msgs/
 colcon build
 source install/setup.bash
 ```
@@ -113,7 +113,14 @@ For robot control, enabling/disabling, and higher-level ROS 2 APIs see:
 ```bash
 ros2 topic echo /robot/joint_states
 ```
-
+**Enable the robot!**
+```bash
+ros2 topic pub --once /robot/set_super_enable std_msgs/msg/Bool "{data: true}"
+```
+**Disable the robot**
+```bash
+ros2 topic pub --once /robot/set_super_enable std_msgs/msg/Bool "{data: true}"
+```
 ---
 
 ## FAQ
