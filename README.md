@@ -119,7 +119,7 @@ ros2 topic pub --once /robot/set_super_enable std_msgs/msg/Bool "{data: true}"
 ```
 **Disable the robot**
 ```bash
-ros2 topic pub --once /robot/set_super_enable std_msgs/msg/Bool "{data: true}"
+ros2 topic pub --once /robot/set_super_enable std_msgs/msg/Bool "{data: false}"
 ```
 ---
 
