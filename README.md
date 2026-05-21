@@ -78,12 +78,13 @@ source /opt/ros/$ROS_DISTRO/setup.bash
 unset ROS_DOMAIN_ID
 export RMW_IMPLEMENTATION=rmw_zenoh_cpp
 
-cd ~/host_ws/
+# Build Baxter ROS 2 message definitions from this repo (once)
+cd ros2_msgs/
 colcon build
 source install/setup.bash
 ```
 
-Then run `rviz2`, `rqt`, or your own nodes. All topics in `bridge_topics.yaml` are now available on the ROS 2 side.
+All Baxter message types (`baxter_core_msgs`, `baxter_maintenance_msgs`, `arm_navigation_msgs`) are now available to your ROS 2 nodes. All topics in `bridge_topics.yaml` are live on the ROS 2 side.
 
 ---
 
