@@ -30,14 +30,6 @@ bash network_setup.sh
 
 This installs the `Rethink` NetworkManager profile and adds `baxter.local` to `/etc/hosts`.
 
-<!-- </details> -->
-
-<!-- Pull the pre-built bridge image:
-
-```bash
-docker pull baxter-zenoh:latest
-``` -->
-
 build from source:
 
 ```bash
@@ -50,7 +42,7 @@ docker build -t baxter-zenoh:latest .
 ## 2. Each session
 
 ```bash
-bash connect.sh
+baxter_start
 ```
 
 This connects to the robot via Ethernet, verifies connectivity, and starts the bridge.
@@ -73,28 +65,17 @@ docker run --rm --network=host \
 
 ## 3. Using the bridge from ROS 2
 
-Add the following to your `~/.bashrc`:
+In a separate terminal, install Zenoh and build the Baxter ROS 2 message definitions (once):
 
 ```bash
-export ROS_MASTER_URI=http://10.42.0.2:11311
-export ROS_IP=10.42.0.1
-unset ROS_HOSTNAME
+sudo apt install ros-$ROS_DISTRO-rmw-zenoh-cpp
+cd ~/baxter-zenoh/ros2_msgs && colcon build
 ```
 
-In a separate terminal on your laptop:
+Then arm any terminal for Baxter work:
 
 ```bash
-# Install Zenoh middleware (once)
-sudo apt install ros-$ROS_DISTRO-rmw-zenoh-cpp
-
-source /opt/ros/$ROS_DISTRO/setup.bash
-unset ROS_DOMAIN_ID
-export RMW_IMPLEMENTATION=rmw_zenoh_cpp
-
-# Build Baxter ROS 2 message definitions from this repo (once)
-cd ~/baxter-zenoh/ros2_msgs/
-colcon build
-source install/setup.bash
+baxter_env
 ```
 
 All Baxter message types (`baxter_core_msgs`, `baxter_maintenance_msgs`, `arm_navigation_msgs`) are now available to your ROS 2 nodes. All topics in `bridge_topics.yaml` are live on the ROS 2 side.
@@ -128,20 +109,18 @@ ros2 topic pub --once /robot/set_super_enable std_msgs/msg/Bool "{data: false}"
 <details>
 <summary><b>The bridge starts but I see no topics on the ROS 2 side</b></summary>
 
-Make sure `RMW_IMPLEMENTATION=rmw_zenoh_cpp` is set in your terminal. Without it your ROS 2 tools use a different middleware and can't see the bridge.
+Make sure you have run `baxter_env` in your terminal. Without it, `RMW_IMPLEMENTATION` and the Baxter message definitions are not set.
 
 ```bash
-export RMW_IMPLEMENTATION=rmw_zenoh_cpp
+baxter_env
 ros2 topic list
 ```
-If that doesn't work, make sure that your ROS_DOMAIN_ID is unset or the same in both the container and your terminal.
+
+If topics are still missing, check that `ROS_DOMAIN_ID` is unset:
+
 ```bash
 unset ROS_DOMAIN_ID
 ros2 topic list
-```
-Also make sure you have sourced the Baxter ROS 2 message definitions:
-```bash
-source ros2_msgs/install/setup.bash
 ```
 
 </details>

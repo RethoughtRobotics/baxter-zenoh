@@ -13,8 +13,22 @@ sudo systemctl restart NetworkManager
 # Add robot hostnames
 grep -qF "baxter.local" /etc/hosts || echo "10.42.0.2 baxter.local" | sudo tee -a /etc/hosts
 
-echo "Done. Add the following to your ~/.bashrc:"
-echo ""
-echo "  export ROS_MASTER_URI=http://10.42.0.2:11311"
-echo "  export ROS_IP=10.42.0.1"
-echo "  unset ROS_HOSTNAME"
+REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# Append env vars and aliases to ~/.bashrc (idempotent)
+if ! grep -qF "# Baxter Bridge" ~/.bashrc; then
+    cat >> ~/.bashrc <<EOF
+
+# Baxter Bridge
+export ROS_MASTER_URI=http://10.42.0.2:11311
+export ROS_IP=10.42.0.1
+unset ROS_HOSTNAME
+alias baxter_start='bash $REPO_DIR/connect.sh'
+alias baxter_env='source $REPO_DIR/activate.sh'
+EOF
+    echo "Added baxter_start and baxter_env aliases to ~/.bashrc."
+else
+    echo "~/.bashrc already configured — skipping."
+fi
+
+echo "Done. Run: source ~/.bashrc"
