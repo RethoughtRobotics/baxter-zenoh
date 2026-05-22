@@ -30,14 +30,6 @@ bash network_setup.sh
 
 This installs the `Rethink` NetworkManager profile and adds `baxter.local` to `/etc/hosts`.
 
-Then add the following to your `~/.bashrc` so every terminal is configured for the robot:
-
-```bash
-export ROS_MASTER_URI=http://10.42.0.2:11311
-export ROS_IP=10.42.0.1
-unset ROS_HOSTNAME
-```
-
 <!-- </details> -->
 
 <!-- Pull the pre-built bridge image:
@@ -56,6 +48,16 @@ docker build -t baxter-zenoh:latest .
 ---
 
 ## 2. Each session
+
+Add the following to your `~/.bashrc` so every terminal is configured for the robot:
+
+```bash
+export ROS_MASTER_URI=http://10.42.0.2:11311
+export ROS_IP=10.42.0.1
+unset ROS_HOSTNAME
+```
+
+Then start the bridge:
 
 ```bash
 bash connect.sh
@@ -166,4 +168,4 @@ The Rethink Ethernet profile has not been installed on this machine. Run the one
 bash network_setup.sh
 ```
 
-</details>
+</details>mya
