@@ -25,10 +25,10 @@ cd ~/baxter-zenoh
 Connect your laptop to the robot via Ethernet, then run:
 
 ```bash
-bash network_setup.sh
+bash setup.sh
 ```
 
-This installs the `Rethink` NetworkManager profile and adds `baxter.local` to `/etc/hosts`.
+This installs the `Rethink` NetworkManager profile, adds `baxter.local` to `/etc/hosts`, installs the Zenoh ROS 2 middleware, and adds `baxter_start` / `baxter_env` aliases to your `~/.bashrc`.
 
 build from source:
 
@@ -65,10 +65,9 @@ docker run --rm --network=host \
 
 ## 3. Using the bridge from ROS 2
 
-In a separate terminal, install Zenoh and build the Baxter ROS 2 message definitions (once):
+In a separate terminal, build the Baxter ROS 2 message definitions (once):
 
 ```bash
-sudo apt install ros-$ROS_DISTRO-rmw-zenoh-cpp
 cd ~/baxter-zenoh/ros2_msgs && colcon build
 ```
 
@@ -142,6 +141,6 @@ ping -c1 10.42.0.2
 The Rethink Ethernet profile has not been installed on this machine. Run the one-time network setup:
 
 ```bash
-bash network_setup.sh
+bash setup.sh
 ```
 </details>
