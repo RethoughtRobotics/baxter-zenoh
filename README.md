@@ -45,9 +45,9 @@ Make sure the robot is on and the Ethernet cable is connected, then open two ter
 
 | Terminal 1: Bridge | Terminal 2: Your ROS 2 workspace|
 |---|---|
-| `baxter_start` | `baxter_env` |
+| `baxter_start` | `bax_msgs` |
 
-**Terminal 1** runs the bridge and stays open. **Terminal 2** (and any others you open) run `baxter_env` once to arm the shell, then you're live.
+**Terminal 1** runs the bridge and stays open. **Terminal 2** (and any others you open) run `bax_msgs` once to source the compiled baxter_msgs.
 
 ---
 
