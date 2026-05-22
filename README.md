@@ -12,40 +12,40 @@ This container bridges Baxter's ROS 1 (`rosmaster` on the robot) to ROS 2 on you
 
 ```bash
 git clone git@github.com:RethoughtRobotics/baxter-zenoh.git
-```
-```bash
 cd ~/baxter-zenoh
 ```
 
+---
+
 ## 1. One-time setup
-
-
-<summary><b>Network configuration (run once per machine)</b></summary>
 
 Connect your laptop to the robot via Ethernet, then run:
 
 ```bash
 bash setup.sh
+source ~/.bashrc
 ```
 
-This installs the `Rethink` NetworkManager profile, adds `baxter.local` to `/etc/hosts`, installs the Zenoh ROS 2 middleware, and adds `baxter_start` / `baxter_env` aliases to your `~/.bashrc`.
+This installs the Ethernet profile, Zenoh middleware, and adds `baxter_start` / `baxter_env` aliases to your shell.
 
-build from source:
+Then build the Docker image and ROS 2 message definitions:
 
 ```bash
-docker build -t baxter-zenoh:latest .
+docker build -t baxter-zenoh:latest .       # ~15 min
+cd ~/baxter-zenoh/ros2_msgs && colcon build
 ```
-**this takes about 15 minutes the first time**
 
 ---
 
 ## 2. Each session
 
-```bash
-baxter_start
-```
+Open two terminals:
 
-This connects to the robot via Ethernet, verifies connectivity, and starts the bridge.
+| Terminal 1 — Bridge | Terminal 2 — Your ROS 2 work |
+|---|---|
+| `baxter_start` | `baxter_env` |
+
+**Terminal 1** runs the bridge and stays open. **Terminal 2** (and any others you open) run `baxter_env` once to arm the shell, then you're live.
 
 <details>
 <summary>Different network?</summary>
@@ -63,25 +63,7 @@ docker run --rm --network=host \
 
 ---
 
-## 3. Using the bridge from ROS 2
-
-In a separate terminal, build the Baxter ROS 2 message definitions (once):
-
-```bash
-cd ~/baxter-zenoh/ros2_msgs && colcon build
-```
-
-Then arm any terminal for Baxter work:
-
-```bash
-baxter_env
-```
-
-All Baxter message types (`baxter_core_msgs`, `baxter_maintenance_msgs`, `arm_navigation_msgs`) are now available to your ROS 2 nodes. All topics in `bridge_topics.yaml` are live on the ROS 2 side.
-
----
-
-## 4. Controlling the robot
+## 3. Controlling the robot
 
 For robot control, enabling/disabling, and higher-level ROS 2 APIs see:
 
@@ -93,7 +75,7 @@ For robot control, enabling/disabling, and higher-level ROS 2 APIs see:
 ```bash
 ros2 topic echo /robot/joint_states
 ```
-**Enable the robot!**
+**Enable the robot**
 ```bash
 ros2 topic pub --once /robot/set_super_enable std_msgs/msg/Bool "{data: true}"
 ```
@@ -101,6 +83,7 @@ ros2 topic pub --once /robot/set_super_enable std_msgs/msg/Bool "{data: true}"
 ```bash
 ros2 topic pub --once /robot/set_super_enable std_msgs/msg/Bool "{data: false}"
 ```
+
 ---
 
 ## FAQ
@@ -133,14 +116,16 @@ The bridge waits for the ROS 1 master before starting. Make sure the robot is on
 nmcli connection up Rethink
 ping -c1 10.42.0.2
 ```
+
 </details>
 
 <details>
 <summary><b><code>nmcli connection up Rethink</code> says the connection is unknown</b></summary>
 
-The Rethink Ethernet profile has not been installed on this machine. Run the one-time network setup:
+The Rethink Ethernet profile has not been installed on this machine. Run the one-time setup:
 
 ```bash
 bash setup.sh
 ```
+
 </details>
