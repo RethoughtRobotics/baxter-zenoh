@@ -43,7 +43,7 @@ cd ~/baxter-zenoh/ros2_msgs && colcon build
 
 Make sure the robot is on and the Ethernet cable is connected, then open two terminals:
 
-| Terminal 1 — Bridge | Terminal 2 — Your ROS 2 work |
+| Terminal 1: Bridge | Terminal 2: Your ROS 2 workspace|
 |---|---|
 | `baxter_start` | `baxter_env` |
 
