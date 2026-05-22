@@ -168,4 +168,3 @@ bash network_setup.sh
 ```
 
 </details>
-<details>
