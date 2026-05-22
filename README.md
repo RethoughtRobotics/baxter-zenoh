@@ -49,16 +49,6 @@ docker build -t baxter-zenoh:latest .
 
 ## 2. Each session
 
-Add the following to your `~/.bashrc` so every terminal is configured for the robot:
-
-```bash
-export ROS_MASTER_URI=http://10.42.0.2:11311
-export ROS_IP=10.42.0.1
-unset ROS_HOSTNAME
-```
-
-Then start the bridge:
-
 ```bash
 bash connect.sh
 ```
@@ -82,6 +72,14 @@ docker run --rm --network=host \
 ---
 
 ## 3. Using the bridge from ROS 2
+
+Add the following to your `~/.bashrc`:
+
+```bash
+export ROS_MASTER_URI=http://10.42.0.2:11311
+export ROS_IP=10.42.0.1
+unset ROS_HOSTNAME
+```
 
 In a separate terminal on your laptop:
 
