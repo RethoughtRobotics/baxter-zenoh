@@ -47,20 +47,6 @@ Open two terminals:
 
 **Terminal 1** runs the bridge and stays open. **Terminal 2** (and any others you open) run `baxter_env` once to arm the shell, then you're live.
 
-<details>
-<summary>Different network?</summary>
-
-The default robot IP is `10.42.0.2` and laptop IP is `10.42.0.1`. Override them without rebuilding:
-
-```bash
-docker run --rm --network=host \
-  -e ROS_MASTER_URI=http://<robot-ip>:11311 \
-  -e ROS_IP=<your-ip> \
-  baxter-zenoh:latest
-```
-
-</details>
-
 ---
 
 ## 3. Controlling the robot
