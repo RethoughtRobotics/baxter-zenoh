@@ -19,7 +19,7 @@ cd ~/baxter-zenoh
 
 ## 1. One-time setup
 
-<details>
+
 <summary><b>Network configuration (run once per machine)</b></summary>
 
 Connect your laptop to the robot via Ethernet, then run:
@@ -38,7 +38,7 @@ export ROS_IP=10.42.0.1
 unset ROS_HOSTNAME
 ```
 
-</details>
+<!-- </details> -->
 
 <!-- Pull the pre-built bridge image:
 
@@ -51,6 +51,7 @@ build from source:
 ```bash
 docker build -t baxter-zenoh:latest .
 ```
+**this takes about 15 minutes the first time**
 
 ---
 
