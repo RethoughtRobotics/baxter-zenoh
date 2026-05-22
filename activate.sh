@@ -15,4 +15,17 @@ fi
 unset ROS_DOMAIN_ID
 export RMW_IMPLEMENTATION=rmw_zenoh_cpp
 
-echo "Baxter ROS 2 environment ready. RMW: $RMW_IMPLEMENTATION"
+echo ""
+echo "  Baxter ROS 2 environment ready"
+echo "  --------------------------------"
+echo "  ROS:  ${ROS_DISTRO}"
+echo "  RMW:  ${RMW_IMPLEMENTATION}"
+if [[ -f "$REPO_DIR/ros2_msgs/install/setup.bash" ]]; then
+    echo "  Msgs: baxter_core_msgs, baxter_maintenance_msgs, arm_navigation_msgs"
+fi
+if docker ps --filter ancestor=ghcr.io/rethoughtrobotics/baxter-zenoh:latest --format "{{.ID}}" 2>/dev/null | grep -q .; then
+    echo "  Bridge: running"
+else
+    echo "  Bridge: not running — open a new terminal and run baxter_start"
+fi
+echo ""
