@@ -24,9 +24,14 @@ else
 fi
 
 # Install Zenoh ROS 2 middleware
-echo "[3/4] Installing Zenoh ROS 2 middleware (ros-${ROS_DISTRO:?ROS_DISTRO is not set — source your ROS 2 setup first}-rmw-zenoh-cpp)..."
-sudo apt-get install -y ros-"$ROS_DISTRO"-rmw-zenoh-cpp
-echo "      Zenoh installed."
+ZENOH_PKG="ros-${ROS_DISTRO:?ROS_DISTRO is not set - source your ROS 2 setup first}-rmw-zenoh-cpp"
+echo "[3/4] Installing Zenoh ROS 2 middleware ($ZENOH_PKG)..."
+if dpkg -s "$ZENOH_PKG" &>/dev/null; then
+    echo "      Already installed — skipping."
+else
+    sudo apt-get install -y -q "$ZENOH_PKG" 2>&1 | grep -v "^$" | grep -v "autoremove" | grep -v "automatically installed"
+    echo "      Zenoh installed."
+fi
 
 # Append env vars and aliases to ~/.bashrc
 echo "[4/4] Configuring ~/.bashrc..."
