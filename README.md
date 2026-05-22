@@ -41,7 +41,7 @@ cd ~/baxter-zenoh/ros2_msgs && colcon build
 
 ## 2. Each session
 
-Open two terminals:
+Make sure the robot is on and the Ethernet cable is connected, then open two terminals:
 
 | Terminal 1 — Bridge | Terminal 2 — Your ROS 2 work |
 |---|---|
@@ -52,8 +52,6 @@ Open two terminals:
 ---
 
 ## 3. Controlling the robot
-
-Test that the bridge is working by echoing a topic published by the robot and enabling/disabling the robot via ROS 2 topics:
 
 **Verify the bridge is working**
 ```bash
@@ -67,6 +65,9 @@ ros2 topic pub --once /robot/set_super_enable std_msgs/msg/Bool "{data: true}"
 ```bash
 ros2 topic pub --once /robot/set_super_enable std_msgs/msg/Bool "{data: false}"
 ```
+
+---
+
 ## 4. Next steps
 
 Once the bridge is running, use the Baxter SDK for higher-level control - motion planning, gripper control, joint commands, and building your own ROS 2 applications:
