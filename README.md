@@ -63,13 +63,19 @@ bash connect.sh
 
 This connects to the robot via Ethernet, verifies connectivity, and starts the bridge.
 
-> **Different network?** The default robot IP is `10.42.0.2` and laptop IP is `10.42.0.1`. Override them without rebuilding:
-> ```bash
-> docker run --rm --network=host \
->   -e ROS_MASTER_URI=http://<robot-ip>:11311 \
->   -e ROS_IP=<your-ip> \
->   baxter-zenoh:latest
-> ```
+<details>
+<summary>Different network?</summary>
+
+The default robot IP is `10.42.0.2` and laptop IP is `10.42.0.1`. Override them without rebuilding:
+
+```bash
+docker run --rm --network=host \
+  -e ROS_MASTER_URI=http://<robot-ip>:11311 \
+  -e ROS_IP=<your-ip> \
+  baxter-zenoh:latest
+```
+
+</details>
 
 ---
 
