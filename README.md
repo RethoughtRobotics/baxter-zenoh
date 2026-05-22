@@ -57,18 +57,11 @@ docker build -t baxter-zenoh:latest .
 
 ## 2. Each session
 
-**Connect to the robot**
 ```bash
-nmcli connection up Rethink
-ping -c1 10.42.0.2        # should succeed before continuing
+bash connect.sh
 ```
 
-**Run the bridge**
-```bash
-docker run --rm --network=host baxter-zenoh:latest
-```
-
-The bridge loads `bridge_topics.yaml` from inside the container and starts forwarding all configured topics and services between ROS 1 and ROS 2.
+This connects to the robot via Ethernet, verifies connectivity, and starts the bridge.
 
 > **Different network?** The default robot IP is `10.42.0.2` and laptop IP is `10.42.0.1`. Override them without rebuilding:
 > ```bash
