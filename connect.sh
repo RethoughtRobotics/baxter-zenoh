@@ -15,4 +15,4 @@ fi
 echo "Robot is reachable."
 
 echo "Starting bridge..."
-docker run --rm --network=host baxter-zenoh:latest
+docker run --rm --network=host ghcr.io/rethoughtrobotics/baxter-zenoh:latest

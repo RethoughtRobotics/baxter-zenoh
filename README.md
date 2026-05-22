@@ -28,10 +28,10 @@ source ~/.bashrc
 
 This installs the Ethernet profile, Zenoh middleware, and adds `baxter_start` / `baxter_env` aliases to your shell.
 
-Then build the Docker image and ROS 2 message definitions:
+Then pull the Docker image and build the ROS 2 message definitions:
 
 ```bash
-docker build -t baxter-zenoh:latest .       # ~15 min
+docker pull ghcr.io/rethoughtrobotics/baxter-zenoh:latest
 cd ~/baxter-zenoh/ros2_msgs && colcon build
 ```
 
