@@ -6,7 +6,7 @@
 
 ![Baxter Bridge overview diagram](overview.png)
 
-This container bridges Baxter's ROS 1 (`rosmaster` on the robot) to ROS 2 on your laptop using [`ros1_bridge`](https://github.com/RethoughtRobotics/ros1_bridge) over Zenoh.
+This container bridges Baxter's ROS 1 (`rosmaster` on the robot) to ROS 2 on your laptop using [`ros1_bridge`](https://github.com/RethoughtRobotics/ros1_bridge) over Zenoh. For a deep dive into how it works, see [Architecture](ARCHITECTURE.md).
 
 ---
 
@@ -165,5 +165,4 @@ The Rethink Ethernet profile has not been installed on this machine. Run the one
 ```bash
 bash network_setup.sh
 ```
-
-</details>mya
+</details>
