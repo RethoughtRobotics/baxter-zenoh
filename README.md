@@ -51,7 +51,7 @@ Open two terminals:
 
 ## 3. Controlling the robot
 
-For robot control, enabling/disabling, and higher-level ROS 2 APIs see:
+Test that the bridge is working by echoing a topic published by the robot and enabling/disabling the robot via ROS 2 topics:
 
 <a href="https://github.com/RethoughtRobotics/BaxterSDK">
   <img src="https://gh-card.dev/repos/RethoughtRobotics/BaxterSDK.svg?fullname=" width="100%" />
@@ -69,6 +69,13 @@ ros2 topic pub --once /robot/set_super_enable std_msgs/msg/Bool "{data: true}"
 ```bash
 ros2 topic pub --once /robot/set_super_enable std_msgs/msg/Bool "{data: false}"
 ```
+## 4. Next steps
+
+Once the bridge is running, use the Baxter SDK for higher-level control - motion planning, gripper control, joint commands, and building your own ROS 2 applications:
+
+<a href="https://github.com/RethoughtRobotics/BaxterSDK">
+  <img src="https://gh-card.dev/repos/RethoughtRobotics/BaxterSDK.svg?fullname=" width="50%" />
+</a>
 
 ---
 
