@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Source this file to prepare a terminal for Baxter ROS 2 work.
-# Usage: source activate.sh   (or via the baxter_env alias)
+# Usage: source activate.sh   (or via the bax_msgs alias)
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 

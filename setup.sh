@@ -40,9 +40,9 @@ if ! grep -qF "# Baxter Bridge" ~/.bashrc; then
 
 # Baxter Bridge
 alias baxter_start='bash $REPO_DIR/connect.sh'
-alias baxter_env='source $REPO_DIR/activate.sh'
+alias bax_msgs='source $REPO_DIR/activate.sh'
 EOF
-    echo "      Added baxter_start and baxter_env aliases."
+    echo "      Added baxter_start and bax_msgs aliases."
 else
     echo "      Already configured — skipping."
 fi
