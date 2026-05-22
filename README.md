@@ -21,7 +21,7 @@ cd ~/baxter-zenoh
 
 ## 1. One-time setup
 
-Connect your laptop to the robot via Ethernet, then run:
+Run once on any machine you want to use with Baxter:
 
 ```bash
 bash setup.sh
