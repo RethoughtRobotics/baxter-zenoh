@@ -28,15 +28,12 @@ echo "[3/4] Installing Zenoh ROS 2 middleware (ros-${ROS_DISTRO:?ROS_DISTRO is n
 sudo apt-get install -y ros-"$ROS_DISTRO"-rmw-zenoh-cpp
 echo "      Zenoh installed."
 
-# Append env vars and aliases to ~/.bashrc (idempotent)
+# Append env vars and aliases to ~/.bashrc
 echo "[4/4] Configuring ~/.bashrc..."
 if ! grep -qF "# Baxter Bridge" ~/.bashrc; then
     cat >> ~/.bashrc <<EOF
 
 # Baxter Bridge
-export ROS_MASTER_URI=http://10.42.0.2:11311
-export ROS_IP=10.42.0.1
-unset ROS_HOSTNAME
 alias baxter_start='bash $REPO_DIR/connect.sh'
 alias baxter_env='source $REPO_DIR/activate.sh'
 EOF

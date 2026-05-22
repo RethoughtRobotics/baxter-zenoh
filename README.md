@@ -53,10 +53,6 @@ Open two terminals:
 
 Test that the bridge is working by echoing a topic published by the robot and enabling/disabling the robot via ROS 2 topics:
 
-<a href="https://github.com/RethoughtRobotics/BaxterSDK">
-  <img src="https://gh-card.dev/repos/RethoughtRobotics/BaxterSDK.svg?fullname=" width="100%" />
-</a>
-
 **Verify the bridge is working**
 ```bash
 ros2 topic echo /robot/joint_states
