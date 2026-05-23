@@ -15,7 +15,7 @@ This container bridges Baxter's ROS 1 (`rosmaster` on the robot) to ROS 2 on you
 ### Clone the repo
 
 ```bash
-git clone git@github.com:RethoughtRobotics/baxter-zenoh.git
+git clone https://github.com/RethoughtRobotics/baxter-zenoh.git
 cd baxter-zenoh
 ```
 
