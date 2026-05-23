@@ -8,7 +8,7 @@
 
 This container bridges Baxter's ROS 1 (`rosmaster` on the robot) to ROS 2 on your laptop using [`ros1_bridge`](https://github.com/RethoughtRobotics/ros1_bridge) over Zenoh. For a deep dive into how it works, see [Architecture](ARCHITECTURE.md).
 
-**Requires Ubuntu 22.04+ and ROS 2 Humble, Jazzy, Kilted, or Lyrical.**
+**Requires Ubuntu 22.04+ and Jazzy, Kilted, or Lyrical.**
 
 ---
 
