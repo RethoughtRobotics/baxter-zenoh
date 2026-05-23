@@ -136,5 +136,10 @@ Check the e-stop status. If the e-stop is engaged, the robot will not enable.
 ```
 if estop_button and estop_source are 1 the estop is engaged. Disengage the e-stop and try again.
 
+After disengaging the e-stop, reset the robot.
+```bash
+ros2 topic pub --once /robot/set_super_reset std_msgs/msg/Empty
+```
+
 </details>
 
