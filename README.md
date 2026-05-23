@@ -126,3 +126,15 @@ bash setup.sh
 ```
 
 </details>
+
+<details>
+<summary>I see ROS 2 topics but the robot does not enable</summary>
+
+Check the e-stop status. If the e-stop is engaged, the robot will not enable.
+```bash
+ ros2 topic echo  --once robot/state
+```
+if estop_button and estop_source are 1 the estop is engaged. Disengage the e-stop and try again.
+
+</details>
+
