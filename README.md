@@ -8,7 +8,7 @@
 
 This container bridges Baxter's ROS 1 (`rosmaster` on the robot) to ROS 2 on your laptop using [`ros1_bridge`](https://github.com/RethoughtRobotics/ros1_bridge) over Zenoh. For a deep dive into how it works, see [Architecture](ARCHITECTURE.md).
 
-**Requires Ubuntu 22.04+ and Jazzy, Kilted, or Lyrical.**
+**Requires Ubuntu 24.04 and ROS 2 Jazzy, Kilted, or Lyrical.**
 
 ---
 
@@ -27,7 +27,7 @@ Run once on any machine you want to use with Baxter:
 
 ```bash
 bash setup.sh
-source ~/.bashrc
+source ~/.bashrc   # or ~/.zshrc if you use zsh
 ```
 
 This installs the Ethernet profile, Zenoh middleware, and adds `baxter_start` / `bax_msgs` aliases to your shell.
@@ -134,7 +134,7 @@ bash setup.sh
 
 Check the e-stop status. If the e-stop is engaged, the robot will not enable.
 ```bash
- ros2 topic echo  --once robot/state
+ros2 topic echo --once /robot/state
 ```
 if estop_button and estop_source are 1 the estop is engaged. Disengage the e-stop and try again.
 

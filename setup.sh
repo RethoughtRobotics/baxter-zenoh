@@ -2,9 +2,11 @@
 # One-time setup for Baxter over Ethernet.
 # Run once: bash setup.sh
 
-set -e
+set -eo pipefail
 
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+[[ "$SHELL" == */zsh ]] && SHELL_RC="$HOME/.zshrc" || SHELL_RC="$HOME/.bashrc"
 
 # Check for nmcli
 if ! command -v nmcli &>/dev/null; then
@@ -15,9 +17,9 @@ fi
 
 # Install the Ethernet connection profile
 echo "[1/4] Installing Rethink Ethernet profile..."
-sudo cp "$REPO_DIR/Rethink.nmconnection" /etc/NetworkManager/system-connections/Rethink
-sudo chown root:root /etc/NetworkManager/system-connections/Rethink
-sudo chmod 600 /etc/NetworkManager/system-connections/Rethink
+sudo cp "$REPO_DIR/Rethink.nmconnection" /etc/NetworkManager/system-connections/Rethink.nmconnection
+sudo chown root:root /etc/NetworkManager/system-connections/Rethink.nmconnection
+sudo chmod 600 /etc/NetworkManager/system-connections/Rethink.nmconnection
 sudo systemctl restart NetworkManager
 echo "      Ethernet profile installed."
 
@@ -40,10 +42,10 @@ else
     echo "      Zenoh installed."
 fi
 
-# Append aliases to ~/.bashrc
-echo "[4/4] Configuring ~/.bashrc..."
-if ! grep -qF "# Baxter Bridge" ~/.bashrc; then
-    cat >> ~/.bashrc <<EOF
+# Append aliases to $SHELL_RC
+echo "[4/4] Configuring $SHELL_RC..."
+if ! grep -qF "# Baxter Bridge" $SHELL_RC; then
+    cat >> $SHELL_RC <<EOF
 
 # Baxter Bridge
 alias baxter_start='bash $REPO_DIR/connect.sh'
@@ -55,4 +57,4 @@ else
 fi
 
 echo ""
-echo "Setup complete. Run: source ~/.bashrc"
+echo "Setup complete. Run: source $SHELL_RC"
