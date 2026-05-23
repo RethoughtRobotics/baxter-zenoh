@@ -6,6 +6,13 @@ set -e
 
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
 
+# Check for nmcli
+if ! command -v nmcli &>/dev/null; then
+    echo "ERROR: nmcli not found. Install NetworkManager first:" >&2
+    echo "  sudo apt-get install network-manager" >&2
+    exit 1
+fi
+
 # Install the Ethernet connection profile
 echo "[1/4] Installing Rethink Ethernet profile..."
 sudo cp "$REPO_DIR/Rethink.nmconnection" /etc/NetworkManager/system-connections/Rethink
@@ -33,7 +40,7 @@ else
     echo "      Zenoh installed."
 fi
 
-# Append env vars and aliases to ~/.bashrc
+# Append aliases to ~/.bashrc
 echo "[4/4] Configuring ~/.bashrc..."
 if ! grep -qF "# Baxter Bridge" ~/.bashrc; then
     cat >> ~/.bashrc <<EOF
