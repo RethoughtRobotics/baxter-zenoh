@@ -14,7 +14,7 @@ This container bridges Baxter's ROS 1 (`rosmaster` on the robot) to ROS 2 on you
 
 ```bash
 git clone git@github.com:RethoughtRobotics/baxter-zenoh.git
-cd ~/baxter-zenoh
+cd ~$pwd/baxter-zenoh
 ```
 
 ---
@@ -30,11 +30,16 @@ source ~/.bashrc
 
 This installs the Ethernet profile, Zenoh middleware, and adds `baxter_start` / `baxter_env` aliases to your shell.
 
-Then pull the Docker image and build the ROS 2 message definitions:
-
+Then pull the Docker image and build the ROS 2 message definitions(the image is about 10gb):
+Pulling takes about 3min on a good connection
 ```bash
 docker pull ghcr.io/rethoughtrobotics/baxter-zenoh:latest
 cd ~/baxter-zenoh/ros2_msgs && colcon build
+```
+Now kill your ROS session and restart the daemon
+this is linked to an issue zenoh https://github.com/ros2/rmw_zenoh/issues/184
+```
+sudo pkill -9 -f ros && ros2 daemon stop && ros2 daemon start
 ```
 
 ---
