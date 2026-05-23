@@ -6,11 +6,11 @@
 
 ![Baxter Bridge overview diagram](overview.png)
 
-ROS 1 Noetic hit end-of-life in May 2025. If you have a Baxter sitting in your lab on a dead ROS 1 stack, this bridge gets you to ROS 2 in under 10 minutes — no changes to the robot required.
+ROS 1 Noetic hit end-of-life in May 2025. If you have a Baxter sitting in your lab on a dead ROS 1 stack, this bridge gets you to ROS 2 in under 10 minutes without any changes to the robot required.
 
 It runs a Docker container on your laptop that bridges all of Baxter's ROS 1 topics and services to ROS 2 using [`ros1_bridge`](https://github.com/RethoughtRobotics/ros1_bridge) over Zenoh. For a deep dive into how it works, see [Architecture](ARCHITECTURE.md).
 
-Looking for Sawyer? → [sawyer-zenoh](https://github.com/RethoughtRobotics/sawyer-zenoh)
+Looking for Sawyer? Checkout the same project for Sawyer [sawyer-zenoh](https://github.com/RethoughtRobotics/sawyer-zenoh)
 
 ---
 
@@ -45,7 +45,7 @@ This installs the Ethernet profile, Zenoh middleware, and adds `baxter_start` / 
 
 Then pull the Docker image and build the ROS 2 message definitions:
 
-> **Note:** The image is about 10 GB — pulling takes roughly 3 minutes on a fast connection.
+> **Note:** The image is about 10 GB - pulling takes roughly 3 minutes on a fast connection.
 
 ```bash
 docker pull ghcr.io/rethoughtrobotics/baxter-zenoh:latest
