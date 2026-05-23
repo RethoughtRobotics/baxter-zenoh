@@ -6,9 +6,20 @@
 
 ![Baxter Bridge overview diagram](overview.png)
 
-This container bridges Baxter's ROS 1 (`rosmaster` on the robot) to ROS 2 on your laptop using [`ros1_bridge`](https://github.com/RethoughtRobotics/ros1_bridge) over Zenoh. For a deep dive into how it works, see [Architecture](ARCHITECTURE.md).
+ROS 1 Noetic hit end-of-life in May 2025. If you have a Baxter sitting in your lab on a dead ROS 1 stack, this bridge gets you to ROS 2 in under 10 minutes — no changes to the robot required.
 
-**Requires Ubuntu 24.04 and ROS 2 Jazzy, Kilted, or Lyrical.**
+It runs a Docker container on your laptop that bridges all of Baxter's ROS 1 topics and services to ROS 2 using [`ros1_bridge`](https://github.com/RethoughtRobotics/ros1_bridge) over Zenoh. For a deep dive into how it works, see [Architecture](ARCHITECTURE.md).
+
+Looking for Sawyer? → [sawyer-zenoh](https://github.com/RethoughtRobotics/sawyer-zenoh)
+
+---
+
+## Prerequisites
+
+- Ubuntu 24.04
+- ROS 2 Jazzy, Kilted, or Lyrical installed and sourced (`source /opt/ros/<distro>/setup.bash`)
+- Docker
+- NetworkManager (`nmcli`) — standard on Ubuntu Desktop
 
 ---
 
@@ -32,15 +43,18 @@ source ~/.bashrc   # or ~/.zshrc if you use zsh
 
 This installs the Ethernet profile, Zenoh middleware, and adds `baxter_start` / `bax_msgs` aliases to your shell.
 
-Then pull the Docker image and build the ROS 2 message definitions(the image is about 10gb):
-Pulling takes about 3min on a good connection
+Then pull the Docker image and build the ROS 2 message definitions:
+
+> **Note:** The image is about 10 GB — pulling takes roughly 3 minutes on a fast connection.
+
 ```bash
 docker pull ghcr.io/rethoughtrobotics/baxter-zenoh:latest
 cd ~/baxter-zenoh/ros2_msgs && colcon build
 ```
-Now kill your ROS session and restart the daemon
-this is linked to an issue zenoh https://github.com/ros2/rmw_zenoh/issues/184
-```
+
+Then restart the ROS daemon (required due to a [known Zenoh issue](https://github.com/ros2/rmw_zenoh/issues/184)):
+
+```bash
 sudo pkill -9 -f ros && ros2 daemon stop && ros2 daemon start
 ```
 
@@ -77,7 +91,7 @@ ros2 topic pub --once /robot/set_super_enable std_msgs/msg/Bool "{data: false}"
 
 ## 4. Next steps
 
-Once the bridge is running, use the Baxter SDK for higher-level control - motion planning, gripper control, joint commands, and building your own ROS 2 applications:
+Once the bridge is running, use the Baxter SDK for higher-level control — motion planning, gripper control, joint commands, and building your own ROS 2 applications:
 
 <a href="https://github.com/RethoughtRobotics/BaxterSDK">
   <img src="https://gh-card.dev/repos/RethoughtRobotics/BaxterSDK.svg?fullname=" width="50%" />
@@ -130,18 +144,18 @@ bash setup.sh
 </details>
 
 <details>
-<summary>I see ROS 2 topics but the robot does not enable</summary>
+<summary><b>I see ROS 2 topics but the robot does not enable</b></summary>
 
 Check the e-stop status. If the e-stop is engaged, the robot will not enable.
+
 ```bash
 ros2 topic echo --once /robot/state
 ```
-if estop_button and estop_source are 1 the estop is engaged. Disengage the e-stop and try again.
 
-After disengaging the e-stop, reset the robot.
+If `estop_button` and `estop_source` are `1`, the e-stop is engaged. Disengage it and reset the robot:
+
 ```bash
 ros2 topic pub --once /robot/set_super_reset std_msgs/msg/Empty
 ```
 
 </details>
-
