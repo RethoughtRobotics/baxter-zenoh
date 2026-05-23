@@ -8,13 +8,15 @@
 
 This container bridges Baxter's ROS 1 (`rosmaster` on the robot) to ROS 2 on your laptop using [`ros1_bridge`](https://github.com/RethoughtRobotics/ros1_bridge) over Zenoh. For a deep dive into how it works, see [Architecture](ARCHITECTURE.md).
 
+**Requires Ubuntu 22.04+ and ROS 2 Humble, Jazzy, Kilted, or Lyrical.**
+
 ---
 
 ### Clone the repo
 
 ```bash
 git clone git@github.com:RethoughtRobotics/baxter-zenoh.git
-cd ~$pwd/baxter-zenoh
+cd baxter-zenoh
 ```
 
 ---
@@ -28,7 +30,7 @@ bash setup.sh
 source ~/.bashrc
 ```
 
-This installs the Ethernet profile, Zenoh middleware, and adds `baxter_start` / `baxter_env` aliases to your shell.
+This installs the Ethernet profile, Zenoh middleware, and adds `baxter_start` / `bax_msgs` aliases to your shell.
 
 Then pull the Docker image and build the ROS 2 message definitions(the image is about 10gb):
 Pulling takes about 3min on a good connection
@@ -88,10 +90,10 @@ Once the bridge is running, use the Baxter SDK for higher-level control - motion
 <details>
 <summary><b>The bridge starts but I see no topics on the ROS 2 side</b></summary>
 
-Make sure you have run `baxter_env` in your terminal. Without it, `RMW_IMPLEMENTATION` and the Baxter message definitions are not set.
+Make sure you have run `bax_msgs` in your terminal. Without it, `RMW_IMPLEMENTATION` and the Baxter message definitions are not set.
 
 ```bash
-baxter_env
+bax_msgs
 ros2 topic list
 ```
 
