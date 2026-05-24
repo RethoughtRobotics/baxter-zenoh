@@ -28,6 +28,7 @@ add_message_files(DIRECTORY msg FILES
   EndpointStates.msg
   HeadPanCommand.msg
   HeadState.msg
+  HomingCommand.msg
   JointCommand.msg
   NavigatorState.msg
   NavigatorStates.msg

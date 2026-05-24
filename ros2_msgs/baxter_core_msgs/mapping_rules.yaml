@@ -111,6 +111,10 @@
   ros1_package_name: baxter_core_msgs
   ros2_message_name: HeadPanCommand
   ros2_package_name: baxter_core_msgs
+- ros1_message_name: HomingCommand
+  ros1_package_name: baxter_core_msgs
+  ros2_message_name: HomingCommand
+  ros2_package_name: baxter_core_msgs
 - ros1_message_name: AssemblyState
   ros1_package_name: baxter_core_msgs
   ros2_message_name: AssemblyState

@@ -22,13 +22,13 @@ topics:
   - { topic: /robot/set_super_enable,      type: std_msgs/msg/Bool  }
   - { topic: /robot/set_super_reset,       type: std_msgs/msg/Empty }
   - { topic: /robot/set_super_stop,        type: std_msgs/msg/Empty }
-  - { topic: /robot/set_homing_mode,       type: std_msgs/msg/Bool  }
+  - { topic: /robot/set_homing_mode,       type: baxter_core_msgs/msg/HomingCommand }
   - { topic: /robot/set_motor_voltage_low, type: std_msgs/msg/Bool  }
 
   # ── Joints ─────────────────────────────────────────────────────────────────
   - { topic: /robot/joint_states,          type: sensor_msgs/msg/JointState }
   - { topic: /robot/ref_joint_states,      type: sensor_msgs/msg/JointState }
-  - { topic: /robot/joint_state_publish_rate, type: std_msgs/msg/Float64    }
+  - { topic: /robot/joint_state_publish_rate, type: std_msgs/msg/UInt16     }
 
   # ── Accelerometers ─────────────────────────────────────────────────────────
   - { topic: /robot/accelerometer/left_accelerometer/state,  type: sensor_msgs/msg/Imu }
@@ -41,16 +41,16 @@ topics:
   - { topic: /robot/limb/right/joint_command_timeout, type: std_msgs/msg/Float64 }
   - { topic: /robot/limb/left/set_speed_ratio,        type: std_msgs/msg/Float64 }
   - { topic: /robot/limb/right/set_speed_ratio,       type: std_msgs/msg/Float64 }
-  - { topic: /robot/limb/left/command_velocity_tozero,  type: std_msgs/msg/Empty }
-  - { topic: /robot/limb/right/command_velocity_tozero, type: std_msgs/msg/Empty }
+  - { topic: /robot/limb/left/command_velocity_tozero,  type: std_msgs/msg/Bool }
+  - { topic: /robot/limb/right/command_velocity_tozero, type: std_msgs/msg/Bool }
   - { topic: /robot/limb/left/command_twist_stamped,  type: geometry_msgs/msg/TwistStamped }
   - { topic: /robot/limb/right/command_twist_stamped, type: geometry_msgs/msg/TwistStamped }
   - { topic: /robot/limb/left/command_stiffness,      type: std_msgs/msg/UInt32 }
   - { topic: /robot/limb/right/command_stiffness,     type: std_msgs/msg/UInt32 }
   - { topic: /robot/limb/left/inverse_dynamics_command, type: trajectory_msgs/msg/JointTrajectoryPoint }
   - { topic: /robot/limb/right/inverse_dynamics_command,type: trajectory_msgs/msg/JointTrajectoryPoint }
-  - { topic: /robot/limb/left/use_default_spring_model,  type: std_msgs/msg/Bool }
-  - { topic: /robot/limb/right/use_default_spring_model, type: std_msgs/msg/Bool }
+  - { topic: /robot/limb/left/use_default_spring_model,  type: std_msgs/msg/Empty }
+  - { topic: /robot/limb/right/use_default_spring_model, type: std_msgs/msg/Empty }
   - { topic: /robot/limb/left/set_dominance,  type: std_msgs/msg/Bool }
   - { topic: /robot/limb/right/set_dominance, type: std_msgs/msg/Bool }
 
