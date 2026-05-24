@@ -37,10 +37,22 @@ topics:
   # ── Arm joint commands ─────────────────────────────────────────────────────
   - { topic: /robot/limb/left/joint_command,          type: baxter_core_msgs/msg/JointCommand }
   - { topic: /robot/limb/right/joint_command,         type: baxter_core_msgs/msg/JointCommand }
-  - { topic: /robot/limb/left/joint_command_timeout,  type: std_msgs/msg/Float64 }
-  - { topic: /robot/limb/right/joint_command_timeout, type: std_msgs/msg/Float64 }
-  - { topic: /robot/limb/left/set_speed_ratio,        type: std_msgs/msg/Float64 }
-  - { topic: /robot/limb/right/set_speed_ratio,       type: std_msgs/msg/Float64 }
+  - topic: /robot/limb/left/joint_command_timeout
+    type: std_msgs/msg/Float64
+    qos:
+      ros2: { durability: transient_local, reliability: reliable, depth: 1 }
+  - topic: /robot/limb/right/joint_command_timeout
+    type: std_msgs/msg/Float64
+    qos:
+      ros2: { durability: transient_local, reliability: reliable, depth: 1 }
+  - topic: /robot/limb/left/set_speed_ratio
+    type: std_msgs/msg/Float64
+    qos:
+      ros2: { durability: transient_local, reliability: reliable, depth: 1 }
+  - topic: /robot/limb/right/set_speed_ratio
+    type: std_msgs/msg/Float64
+    qos:
+      ros2: { durability: transient_local, reliability: reliable, depth: 1 }
   - { topic: /robot/limb/left/command_velocity_tozero,  type: std_msgs/msg/Bool }
   - { topic: /robot/limb/right/command_velocity_tozero, type: std_msgs/msg/Bool }
   - { topic: /robot/limb/left/command_twist_stamped,  type: geometry_msgs/msg/TwistStamped }
@@ -94,10 +106,22 @@ topics:
   # ── End effectors ──────────────────────────────────────────────────────────
   - { topic: /robot/end_effector/left_gripper/command,              type: baxter_core_msgs/msg/EndEffectorCommand    }
   - { topic: /robot/end_effector/right_gripper/command,             type: baxter_core_msgs/msg/EndEffectorCommand    }
-  - { topic: /robot/end_effector/left_gripper/rsdk/set_properties,  type: baxter_core_msgs/msg/EndEffectorProperties }
-  - { topic: /robot/end_effector/right_gripper/rsdk/set_properties, type: baxter_core_msgs/msg/EndEffectorProperties }
-  - { topic: /robot/end_effector/left_gripper/rsdk/set_state,       type: baxter_core_msgs/msg/EndEffectorState      }
-  - { topic: /robot/end_effector/right_gripper/rsdk/set_state,      type: baxter_core_msgs/msg/EndEffectorState      }
+  - topic: /robot/end_effector/left_gripper/rsdk/set_properties
+    type: baxter_core_msgs/msg/EndEffectorProperties
+    qos:
+      ros2: { durability: transient_local, reliability: reliable, depth: 1 }
+  - topic: /robot/end_effector/right_gripper/rsdk/set_properties
+    type: baxter_core_msgs/msg/EndEffectorProperties
+    qos:
+      ros2: { durability: transient_local, reliability: reliable, depth: 1 }
+  - topic: /robot/end_effector/left_gripper/rsdk/set_state
+    type: baxter_core_msgs/msg/EndEffectorState
+    qos:
+      ros2: { durability: transient_local, reliability: reliable, depth: 1 }
+  - topic: /robot/end_effector/right_gripper/rsdk/set_state
+    type: baxter_core_msgs/msg/EndEffectorState
+    qos:
+      ros2: { durability: transient_local, reliability: reliable, depth: 1 }
   - { topic: /robot/end_effector/left_gripper/state,       type: baxter_core_msgs/msg/EndEffectorState      }
   - { topic: /robot/end_effector/right_gripper/state,      type: baxter_core_msgs/msg/EndEffectorState      }
   - { topic: /robot/end_effector/left_gripper/properties,  type: baxter_core_msgs/msg/EndEffectorProperties }
