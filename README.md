@@ -45,7 +45,7 @@ This installs the Ethernet profile, Zenoh middleware, and adds `baxter_start` / 
 
 Then pull the Docker image and build the ROS 2 message definitions:
 
-> **Note:** The image is about 10 GB - pulling takes roughly 3 minutes on a fast connection.
+> **Note:** The image is about 10 GB - pulling takes roughly 3 minutes on a good connection.
 
 ```bash
 docker pull ghcr.io/rethoughtrobotics/baxter-zenoh:latest
