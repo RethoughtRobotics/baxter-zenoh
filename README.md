@@ -6,7 +6,7 @@
 
 ![Baxter Bridge overview diagram](overview.png)
 
-ROS 1 Noetic hit end-of-life in May 2025. If you have a Baxter sitting in your lab on a dead ROS 1 stack, this bridge gets you to ROS 2 in under 10 minutes without any changes to the robot required.
+ROS 1 Noetic hit end-of-life in May 2025. If you have a Baxter sitting in your lab on the old ROS 1 stack, this bridge gets you to ROS 2 in under 10 minutes without any changes to the robot required.
 
 It runs a Docker container on your laptop that bridges all of Baxter's ROS 1 topics and services to ROS 2 using [`ros1_bridge`](https://github.com/RethoughtRobotics/ros1_bridge) over Zenoh. For a deep dive into how it works, see [Architecture](ARCHITECTURE.md).
 
