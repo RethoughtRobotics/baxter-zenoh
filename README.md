@@ -159,3 +159,24 @@ ros2 topic pub --once /robot/set_super_reset std_msgs/msg/Empty
 ```
 
 </details>
+
+<details>
+<summary><b>I see ROS 2 topics but commands (enable, reset, joint commands) never reach the robot</b></summary>
+
+Most likely the firewall on your laptop is blocking the robot. Robot → laptop topics like `/robot/state` still work because the bridge opens those connections itself. Commands sent from the laptop to the robot are different: ROS 1 requires the robot to open a connection *into* your laptop, and a firewall (e.g. `ufw`) drops it. The bridge log still says `Passing message from ROS 2 ... to ROS 1`, but the robot never receives it, and `enable_robot -e` fails with `[Errno 110] Failed to enable robot`. Running `rostopic pub` over ssh on the robot works because it never crosses the firewall.
+
+Check whether the firewall is on:
+
+```bash
+sudo ufw status
+```
+
+If it is active, allow incoming traffic from the robot:
+
+```bash
+sudo ufw allow from 10.42.0.2
+```
+
+Then **restart the bridge** (Ctrl-C and run `baxter_start` again). The robot does not retry connections that failed earlier, so the firewall rule only takes effect after a restart.
+
+</details>
