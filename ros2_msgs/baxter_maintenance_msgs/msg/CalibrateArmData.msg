@@ -1,1 +1,0 @@
-bool suppress_write_to_file

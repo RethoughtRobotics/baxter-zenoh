@@ -43,14 +43,24 @@ source ~/.bashrc   # or ~/.zshrc if you use zsh
 
 This installs the Ethernet profile, Zenoh middleware, and adds `baxter_start` / `bax_msgs` aliases to your shell.
 
-Then pull the Docker image and build the ROS 2 message definitions:
+Then pull the Docker image:
 
 > **Note:** The image is about 10 GB - pulling takes roughly 3 minutes on a good connection.
 
 ```bash
 docker pull ghcr.io/rethoughtrobotics/baxter-zenoh:latest
-cd ~/baxter-zenoh/ros2_msgs && colcon build
 ```
+
+Your ROS 2 nodes need Baxter's message types, which live in
+[BaxterSDK](https://github.com/RethoughtRobotics/BaxterSDK), the same definitions the image is built
+from. Building BaxterSDK provides them. To get only the messages:
+
+```bash
+git clone https://github.com/RethoughtRobotics/BaxterSDK ~/BaxterSDK
+cd ~/BaxterSDK && colcon build --packages-select baxter_core_msgs baxter_maintenance_msgs
+```
+
+`bax_msgs` sources `~/BaxterSDK/install`; set `BAXTER_SDK` if your workspace is elsewhere.
 
 Then restart the ROS daemon (required due to a [known Zenoh issue](https://github.com/ros2/rmw_zenoh/issues/184)):
 
@@ -68,7 +78,7 @@ Make sure the robot is on and the Ethernet cable is connected, then open two ter
 |---|---|
 | `baxter_start` | `bax_msgs` |
 
-**Terminal 1** runs the bridge and stays open. **Terminal 2** (and any others you open) run `bax_msgs` once to source the compiled baxter_msgs.
+**Terminal 1** runs the bridge and stays open. **Terminal 2** (and any others you open) run `bax_msgs` once to source Baxter's message types.
 
 ---
 
