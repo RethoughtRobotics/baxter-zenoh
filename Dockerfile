@@ -35,7 +35,15 @@ RUN bash -c "\
 RUN git clone --branch kilted --single-branch \
     https://github.com/RethoughtRobotics/ros1_bridge \
     /bridge_ws/src/ros1_bridge
-    
+
+# Add the ROS 2 node to the executor once. spin_node_once re-adds it and rebuilds the wait set over
+# every bridged topic for each single message (~8 ms): ~115 msgs/s in all, so with both arms
+# commanded (2 x 63 Hz) the right arm's joint_command queued 1.6 s behind and its servo went unstable.
+RUN f=/bridge_ws/src/ros1_bridge/src/parameter_bridge.cpp && \
+    sed -i 's|^\(\s*\)rclcpp::executors::SingleThreadedExecutor executor;|&\n\1executor.add_node(ros2_node);|; s|executor.spin_node_once(ros2_node, |executor.spin_once(|' "$f" && \
+    grep -q 'executor.add_node(ros2_node);' "$f" && grep -q 'executor.spin_once(std::chrono' "$f" && \
+    ! grep -q spin_node_once "$f"
+
 RUN bash -c "\
     source /opt/ros/one/setup.bash && \
     source /ros1_ws/devel/setup.bash && \
