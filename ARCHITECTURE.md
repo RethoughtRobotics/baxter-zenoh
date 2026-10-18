@@ -12,8 +12,8 @@ Built on `osrf/ros:kilted-desktop-full` (pinned by SHA for reproducibility). ROS
 ### ROS 1 Messages (`ros1_msgs/`)
 Catkin packages containing the original Baxter message and service definitions, built against ROS-O. These are the same message types the robot publishes.
 
-### ROS 2 Messages (`ros2_msgs/`)
-Colcon packages containing ROS 2 ports of the Baxter messages, with `mapping_rules.yaml` files that tell `ros1_bridge` how to map between ROS 1 and ROS 2 types. Also built on the host so your ROS 2 nodes can use Baxter message types.
+### ROS 2 Messages
+The ROS 2 ports of the Baxter messages live in [BaxterSDK](https://github.com/RethoughtRobotics/BaxterSDK) (`src/baxter_common`), with `mapping_rules.yaml` files that tell `ros1_bridge` how to map between ROS 1 and ROS 2 types. The image builds them from a pinned BaxterSDK commit, and your ROS 2 nodes use the same packages from BaxterSDK, so both ends always agree on every type. Under rmw_zenoh a topic only connects when both ends have the same type hash. `ros2_msgs/arm_navigation_msgs` is used only by the bridge, so it stays here.
 
 ### ros1_bridge
 A [custom fork](https://github.com/RethoughtRobotics/ros1_bridge) of the official `ros1_bridge`, built from source against both ROS-O and Kilted. Uses `parameter_bridge` mode, which bridges only the topics and services explicitly listed in `bridge_topics.yaml`.
@@ -40,7 +40,7 @@ The container entrypoint. In order:
 `ros1_bridge` maps between ROS 1 and ROS 2 message types using `mapping_rules.yaml` files in each ROS 2 message package. For example:
 
 ```yaml
-# ros2_msgs/baxter_core_msgs/mapping_rules.yaml
+# BaxterSDK: src/baxter_common/baxter_core_msgs/mapping_rules.yaml
 - ros1_package_name: baxter_core_msgs
   ros1_message_name: JointCommand
   ros2_package_name: baxter_core_msgs

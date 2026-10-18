@@ -23,8 +23,18 @@ RUN bash -c "\
     cd /ros1_ws && \
     catkin_make"
 
-# ROS 2 baxter messages colcon, built against Kilted
-COPY ros2_msgs/ /ros2_ws/src/
+# ROS 2 messages, built against Kilted. Baxter's come from BaxterSDK, the one source of its ROS 2
+# interfaces: under rmw_zenoh a topic only connects when both ends have the same type hash, so a
+# second copy that drifts silently cuts that topic. Pinned like ros1_bridge below.
+# arm_navigation_msgs is only ever used by the bridge, so it lives here.
+ARG BAXTER_SDK_COMMIT=8d9a77f3bd6f0f144587f89ff823e4e9dafce5f5
+RUN git clone https://github.com/RethoughtRobotics/BaxterSDK /tmp/sdk && \
+    git -C /tmp/sdk checkout --detach "$BAXTER_SDK_COMMIT" && \
+    mkdir -p /ros2_ws/src && \
+    mv /tmp/sdk/src/baxter_common/baxter_core_msgs /tmp/sdk/src/baxter_common/baxter_maintenance_msgs \
+        /ros2_ws/src/ && \
+    rm -rf /tmp/sdk
+COPY ros2_msgs/arm_navigation_msgs/ /ros2_ws/src/arm_navigation_msgs/
 
 RUN bash -c "\
     source /opt/ros/kilted/setup.bash && \
