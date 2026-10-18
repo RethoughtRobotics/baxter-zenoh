@@ -2,14 +2,14 @@
 # Source this file to prepare a terminal for Baxter ROS 2 work.
 # Usage: source activate.sh   (or via the bax_msgs alias)
 
-REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
-
 source /opt/ros/"${ROS_DISTRO:-kilted}"/setup.bash
 
-if [[ -f "$REPO_DIR/ros2_msgs/install/setup.bash" ]]; then
-    source "$REPO_DIR/ros2_msgs/install/setup.bash"
+# Baxter's ROS 2 message types come from the BaxterSDK workspace (see README).
+BAXTER_SDK="${BAXTER_SDK:-$HOME/BaxterSDK}"
+if [[ -f "$BAXTER_SDK/install/setup.bash" ]]; then
+    source "$BAXTER_SDK/install/setup.bash"
 else
-    echo "Note: Baxter message types unavailable. Run: cd $REPO_DIR/ros2_msgs && colcon build"
+    echo "Note: Baxter message types unavailable. Build BaxterSDK (see README) or set BAXTER_SDK."
 fi
 
 unset ROS_DOMAIN_ID
@@ -20,8 +20,8 @@ echo "  Baxter ROS 2 environment ready"
 echo "  --------------------------------"
 echo "  ROS:  ${ROS_DISTRO}"
 echo "  RMW:  ${RMW_IMPLEMENTATION}"
-if [[ -f "$REPO_DIR/ros2_msgs/install/setup.bash" ]]; then
-    echo "  Msgs: baxter_core_msgs, baxter_maintenance_msgs, arm_navigation_msgs"
+if [[ -f "$BAXTER_SDK/install/setup.bash" ]]; then
+    echo "  Msgs: $BAXTER_SDK"
 fi
 if docker ps --filter ancestor=ghcr.io/rethoughtrobotics/baxter-zenoh:latest --format "{{.ID}}" 2>/dev/null | grep -q .; then
     echo "  Bridge: running"
