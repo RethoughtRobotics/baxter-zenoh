@@ -31,10 +31,12 @@ RUN bash -c "\
     cd /ros2_ws && \
     colcon build --packages-select baxter_core_msgs baxter_maintenance_msgs arm_navigation_msgs"
 
-# ros1_bridge updated with issues fix
-RUN git clone --branch kilted --single-branch \
-    https://github.com/RethoughtRobotics/ros1_bridge \
-    /bridge_ws/src/ros1_bridge
+# ros1_bridge fork with the Kilted build fixes and the executor fix (the ROS 2 node is added to the
+# executor once; per-callback spin_node_once() capped the bridge near 115 msgs/s, so two arms
+# streaming commands starved one). Pinned to a commit so a rebuild is the image that was tested.
+ARG ROS1_BRIDGE_COMMIT=9ca710713c371966916405de5acd5afd282d420b
+RUN git clone https://github.com/RethoughtRobotics/ros1_bridge /bridge_ws/src/ros1_bridge && \
+    git -C /bridge_ws/src/ros1_bridge checkout --detach "$ROS1_BRIDGE_COMMIT"
     
 RUN bash -c "\
     source /opt/ros/one/setup.bash && \

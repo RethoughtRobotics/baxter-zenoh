@@ -35,8 +35,9 @@ topics:
   - { topic: /robot/accelerometer/right_accelerometer/state, type: sensor_msgs/msg/Imu }
 
   # ── Arm joint commands ─────────────────────────────────────────────────────
-  - { topic: /robot/limb/left/joint_command,          type: baxter_core_msgs/msg/JointCommand }
-  - { topic: /robot/limb/right/joint_command,         type: baxter_core_msgs/msg/JointCommand }
+  # queue_size 1: a command is a whole setpoint; one queued behind newer ones is only stale
+  - { topic: /robot/limb/left/joint_command,          type: baxter_core_msgs/msg/JointCommand, queue_size: 1 }
+  - { topic: /robot/limb/right/joint_command,         type: baxter_core_msgs/msg/JointCommand, queue_size: 1 }
   - topic: /robot/limb/left/joint_command_timeout
     type: std_msgs/msg/Float64
     qos:
