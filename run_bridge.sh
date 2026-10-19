@@ -39,4 +39,23 @@ echo "ROS master ready."
 
 rosparam load /bridge_topics.yaml
 
+# Hand camera settings, the default for everything that uses the robot. Baxter opens them on
+# auto exposure, which runs dim; exposure 40 is about auto's own shutter time, so gain 8
+# brightens them without more motion blur or lag (matched to the third_eye RealSense overhead,
+# 2026-10-07). Controls (baxter_core_msgs/CameraControl): 100 exposure 0-100, 101 gain 0-79,
+# -1 = auto. Applied in the background once the camera service is up, so the bridge starts at once.
+# ROS 1 only: with the Kilted setup above also on PYTHONPATH, rosservice fails to import
+# (ROS 2's rosgraph_msgs shadows ROS 1's), so this runs in a clean environment.
+# Override with CAMERA_SETTINGS (docker run -e); set it empty to leave the cameras untouched.
+DEFAULT_CAMERA_SETTINGS='{width: 640, height: 400, fps: 25, controls: [{id: 100, value: 40}, {id: 101, value: 8}]}'
+CAMERA_SETTINGS="${CAMERA_SETTINGS-$DEFAULT_CAMERA_SETTINGS}"
+[[ -n "$CAMERA_SETTINGS" ]] && env -i HOME="$HOME" PATH=/usr/bin:/bin ROS_MASTER_URI="$ROS_MASTER_URI" ROS_IP="$ROS_IP" \
+    CAMERA_SETTINGS="$CAMERA_SETTINGS" bash -c '
+    source /opt/ros/one/setup.bash; source /ros1_ws/devel/setup.bash
+    until rosservice list 2>/dev/null | grep -qx /cameras/open; do sleep 2; done
+    for camera in left_hand_camera right_hand_camera; do
+        rosservice call /cameras/open "{name: $camera, settings: $CAMERA_SETTINGS}" >/dev/null \
+            && echo "Opened $camera: $CAMERA_SETTINGS" || echo "WARNING: could not set up $camera" >&2
+    done' &
+
 exec ros2 run ros1_bridge parameter_bridge
