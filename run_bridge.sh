@@ -49,6 +49,8 @@ rosparam load /bridge_topics.yaml
 # Override with CAMERA_SETTINGS (docker run -e); set it empty to leave the cameras untouched.
 DEFAULT_CAMERA_SETTINGS='{width: 640, height: 400, fps: 25, controls: [{id: 100, value: 40}, {id: 101, value: 8}]}'
 CAMERA_SETTINGS="${CAMERA_SETTINGS-$DEFAULT_CAMERA_SETTINGS}"
+# The inner script is single-quoted on purpose: $camera and $CAMERA_SETTINGS expand in that clean shell.
+# shellcheck disable=SC2016
 [[ -n "$CAMERA_SETTINGS" ]] && env -i HOME="$HOME" PATH=/usr/bin:/bin ROS_MASTER_URI="$ROS_MASTER_URI" ROS_IP="$ROS_IP" \
     CAMERA_SETTINGS="$CAMERA_SETTINGS" bash -c '
     source /opt/ros/one/setup.bash; source /ros1_ws/devel/setup.bash

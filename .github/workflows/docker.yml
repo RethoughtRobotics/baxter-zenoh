@@ -1,3 +1,4 @@
+---
 name: Build and Push Docker Image
 
 on:
@@ -34,6 +35,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: |
+          tags: |-
             ghcr.io/rethoughtrobotics/baxter-zenoh:latest
             ghcr.io/rethoughtrobotics/baxter-zenoh:${{ github.sha }}

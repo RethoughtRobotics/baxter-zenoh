@@ -21,7 +21,7 @@ A [custom fork](https://github.com/RethoughtRobotics/ros1_bridge) of the officia
 ### Zenoh (`rmw_zenoh_cpp`)
 Replaces the default DDS middleware. Zenoh is used because it performs significantly better than DDS particularly for high-frequency topics like joint states and camera images.
 
-`rmw_zenoh_cpp` is configured in **router mode**: all ROS 2 nodes connect to a single local `rmw_zenohd` router process rather than discovering each other peer-to-peer. This is critical for this bridge — when `parameter_bridge` starts, it registers all 272 bridged topics with zenohd simultaneously. The router model means that registration is instant and atomic.
+`rmw_zenoh_cpp` is configured in **router mode**: all ROS 2 nodes connect to a single local `rmw_zenohd` router process rather than discovering each other peer-to-peer. This is critical for this bridge: when `parameter_bridge` starts, it registers all 272 bridged topics with zenohd simultaneously. The router model means that registration is instant and atomic.
 
 ### `bridge_topics.yaml`
 This lists every topic (with ROS 2 message type) and every service (with ROS 1 service type) to be forwarded between ROS 1 and ROS 2. Loaded onto the ROS 1 parameter server at startup via `rosparam load`.
@@ -53,16 +53,16 @@ Without these rules, `ros1_bridge` cannot bridge custom message types - only sta
 
 ```
 Baxter publishes /robot/joint_states (ROS 1)
-    → ros1_bridge reads it via ROS 1 subscriber
-    → ros1_bridge republishes it as ROS 2 topic
-    → Your node subscribes via rmw_zenoh_cpp
+    then ros1_bridge reads it via ROS 1 subscriber
+    then ros1_bridge republishes it as ROS 2 topic
+    then your node subscribes via rmw_zenoh_cpp
 ```
 
 ```
 Your node publishes /robot/limb/left/joint_command (ROS 2)
-    → ros1_bridge reads it via ROS 2 subscriber
-    → ros1_bridge republishes it as ROS 1 topic
-    → Baxter's controller receives it
+    then ros1_bridge reads it via ROS 2 subscriber
+    then ros1_bridge republishes it as ROS 1 topic
+    then Baxter's controller receives it
 ```
 
-Services work the same way but are unidirectional — ROS 2 clients call ROS 1 servers (e.g. the IK solver).
+Services work the same way but are unidirectional: ROS 2 clients call ROS 1 servers (e.g. the IK solver).

@@ -47,7 +47,7 @@ RUN bash -c "\
 ARG ROS1_BRIDGE_COMMIT=9ca710713c371966916405de5acd5afd282d420b
 RUN git clone https://github.com/RethoughtRobotics/ros1_bridge /bridge_ws/src/ros1_bridge && \
     git -C /bridge_ws/src/ros1_bridge checkout --detach "$ROS1_BRIDGE_COMMIT"
-    
+
 RUN bash -c "\
     source /opt/ros/one/setup.bash && \
     source /ros1_ws/devel/setup.bash && \

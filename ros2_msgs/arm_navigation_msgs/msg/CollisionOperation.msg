@@ -1,5 +1,5 @@
 # A definition of a collision operation
-# E.g. ("gripper",COLLISION_SET_ALL,ENABLE) will enable collisions 
+# E.g. ("gripper",COLLISION_SET_ALL,ENABLE) will enable collisions
 # between the gripper and all objects in the collision space
 
 string object1
