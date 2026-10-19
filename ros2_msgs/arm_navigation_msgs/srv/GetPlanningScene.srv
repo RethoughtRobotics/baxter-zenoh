@@ -1,4 +1,4 @@
-# OPTIONAL: This contains any differences the user would like 
+# OPTIONAL: This contains any differences the user would like
 # to apply to the current planning scene.  This will not
 # affect the current state of any other node
 PlanningScene planning_scene_diff
@@ -6,9 +6,6 @@ PlanningScene planning_scene_diff
 # OPTINAL: Diff uses ordered collision operations instead of allowed_collision_matrix
 arm_navigation_msgs/OrderedCollisionOperations operations
 ---
-# This includes the current planning scene and any changes applied from the 
+# This includes the current planning scene and any changes applied from the
 # diff
 PlanningScene planning_scene
-
-						   
-				   

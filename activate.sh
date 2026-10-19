@@ -1,7 +1,8 @@
-#!/usr/bin/env bash
+# shellcheck shell=bash
 # Source this file to prepare a terminal for Baxter ROS 2 work.
 # Usage: source activate.sh   (or via the bax_msgs alias)
 
+# shellcheck source=/dev/null
 source /opt/ros/"${ROS_DISTRO:-kilted}"/setup.bash
 
 # Baxter's ROS 2 message types come from the BaxterSDK workspace (see README).
@@ -26,6 +27,6 @@ fi
 if docker ps --filter ancestor=ghcr.io/rethoughtrobotics/baxter-zenoh:latest --format "{{.ID}}" 2>/dev/null | grep -q .; then
     echo "  Bridge: running"
 else
-    echo "  Bridge: not running — open a new terminal and run baxter_start"
+    echo "  Bridge: not running. Open a new terminal and run baxter_start."
 fi
 echo ""

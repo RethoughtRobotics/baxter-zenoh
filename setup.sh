@@ -26,7 +26,7 @@ echo "      Ethernet profile installed."
 # Add robot hostname
 echo "[2/4] Adding baxter.local to /etc/hosts..."
 if grep -qF "baxter.local" /etc/hosts; then
-    echo "      Already present — skipping."
+    echo "      Already present, skipping."
 else
     echo "10.42.0.2 baxter.local" | sudo tee -a /etc/hosts > /dev/null
     echo "      Done."
@@ -36,7 +36,7 @@ fi
 ZENOH_PKG="ros-${ROS_DISTRO:?ROS_DISTRO is not set - source your ROS 2 setup first}-rmw-zenoh-cpp"
 echo "[3/4] Installing Zenoh ROS 2 middleware ($ZENOH_PKG)..."
 if dpkg -s "$ZENOH_PKG" &>/dev/null; then
-    echo "      Already installed — skipping."
+    echo "      Already installed, skipping."
 else
     sudo apt-get install -y -q "$ZENOH_PKG" 2>&1 | grep -v "^$" | grep -v "autoremove" | grep -v "automatically installed"
     echo "      Zenoh installed."
@@ -44,8 +44,8 @@ fi
 
 # Append aliases to $SHELL_RC
 echo "[4/4] Configuring $SHELL_RC..."
-if ! grep -qF "# Baxter Bridge" $SHELL_RC; then
-    cat >> $SHELL_RC <<EOF
+if ! grep -qF "# Baxter Bridge" "$SHELL_RC"; then
+    cat >> "$SHELL_RC" <<EOF
 
 # Baxter Bridge
 alias baxter_start='bash $REPO_DIR/connect.sh'
@@ -53,7 +53,7 @@ alias bax_msgs='source $REPO_DIR/activate.sh'
 EOF
     echo "      Added baxter_start and bax_msgs aliases."
 else
-    echo "      Already configured — skipping."
+    echo "      Already configured, skipping."
 fi
 
 echo ""

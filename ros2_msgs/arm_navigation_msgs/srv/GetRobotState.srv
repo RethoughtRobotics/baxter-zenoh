@@ -7,6 +7,6 @@
 arm_navigation_msgs/RobotState robot_state
 
 # Integer error code corresponding to the first check that was violated
-# The message contains both the returned error code value and a set 
+# The message contains both the returned error code value and a set
 # of possible error codes
 arm_navigation_msgs/ArmNavigationErrorCodes error_code

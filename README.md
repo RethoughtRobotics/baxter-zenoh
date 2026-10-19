@@ -19,7 +19,7 @@ Looking for Sawyer? Checkout the same project for Sawyer [sawyer-zenoh](https://
 - Ubuntu 24.04
 - ROS 2 Jazzy, Kilted, or Lyrical installed and sourced (`source /opt/ros/<distro>/setup.bash`)
 - Docker
-- NetworkManager (`nmcli`) — standard on Ubuntu Desktop
+- NetworkManager (`nmcli`), standard on Ubuntu Desktop
 
 ---
 
@@ -85,14 +85,19 @@ Make sure the robot is on and the Ethernet cable is connected, then open two ter
 ## 3. Controlling the robot
 
 **Verify the bridge is working**
+
 ```bash
 ros2 topic echo /robot/joint_states
 ```
+
 **Enable the robot**
+
 ```bash
 ros2 topic pub --once /robot/set_super_enable std_msgs/msg/Bool "{data: true}"
 ```
+
 **Disable the robot**
+
 ```bash
 ros2 topic pub --once /robot/set_super_enable std_msgs/msg/Bool "{data: false}"
 ```
@@ -101,7 +106,7 @@ ros2 topic pub --once /robot/set_super_enable std_msgs/msg/Bool "{data: false}"
 
 ## 4. Next steps
 
-Once the bridge is running, use the Baxter SDK for higher-level control — motion planning, gripper control, joint commands, and building your own ROS 2 applications:
+Once the bridge is running, use the Baxter SDK for higher-level control: motion planning, gripper control, joint commands, and building your own ROS 2 applications:
 
 <a href="https://github.com/RethoughtRobotics/BaxterSDK">
   <img src="https://gh-card.dev/repos/RethoughtRobotics/BaxterSDK.svg?fullname=" width="50%" />
@@ -173,7 +178,7 @@ ros2 topic pub --once /robot/set_super_reset std_msgs/msg/Empty
 <details>
 <summary><b>I see ROS 2 topics but commands (enable, reset, joint commands) never reach the robot</b></summary>
 
-Most likely the firewall on your laptop is blocking the robot. Robot → laptop topics like `/robot/state` still work because the bridge opens those connections itself. Commands sent from the laptop to the robot are different: ROS 1 requires the robot to open a connection *into* your laptop, and a firewall (e.g. `ufw`) drops it. The bridge log still says `Passing message from ROS 2 ... to ROS 1`, but the robot never receives it, and `enable_robot -e` fails with `[Errno 110] Failed to enable robot`. Running `rostopic pub` over ssh on the robot works because it never crosses the firewall.
+Most likely the firewall on your laptop is blocking the robot. Robot-to-laptop topics like `/robot/state` still work because the bridge opens those connections itself. Commands sent from the laptop to the robot are different: ROS 1 requires the robot to open a connection *into* your laptop, and a firewall (e.g. `ufw`) drops it. The bridge log still says `Passing message from ROS 2 ... to ROS 1`, but the robot never receives it, and `enable_robot -e` fails with `[Errno 110] Failed to enable robot`. Running `rostopic pub` over ssh on the robot works because it never crosses the firewall.
 
 Check whether the firewall is on:
 
