@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# Connects to Baxter and runs the bridge.
-# Usage: bash connect.sh
+# Connect to Baxter and run the bridge (the robot's ROS 1 graph on ROS 2).
+# Usage: bash connect.sh   (alias: baxter_start)
 
+if [[ " $* " =~ \ (-h|--help)\  ]]; then sed -n '2,/^$/{/^#/s/^# \{0,1\}//p}' "$0"; exit 0; fi
 set -e
 
 IMAGE=ghcr.io/rethoughtrobotics/baxter-zenoh:latest
